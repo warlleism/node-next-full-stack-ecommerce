@@ -1,0 +1,146 @@
+.container-cards {
+    gap: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    .container-caroussel {
+        width: 70%;
+        gap: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @media (max-width: 1407px) {
+            width: 95%;
+        }
+
+        .swiper-button {
+            color: #838383;
+            cursor: pointer;
+            font-size: 1.8rem;
+            border-radius: 100px;
+            transition: .5s ease-in-out;
+            outline: #29292948 solid 2px;
+        }
+
+        .swiper-button:hover {
+            color: #0b0b25;
+        }
+
+        .carousel {
+            width: 100%;
+            position: relative;
+
+            .product-card {
+                gap: 10px;
+                height: 410px;
+                display: flex;
+                padding: 10px;
+                position: relative;
+                border-radius: 5px;
+                flex-direction: column;
+                box-sizing: border-box;
+                background-color: rgb(240, 240, 240);
+                border: solid 1px rgba(0, 0, 0, 0.089);
+
+                .card-image-container {
+                    width: 100%;
+                    height: 200px;
+                    display: flex;
+                    position: relative;
+                    align-items: center;
+                    justify-content: center;
+
+                    .card-icon-favorite {
+                        position: absolute;
+                        top: 10px;
+                        right: 10px;
+                        cursor: pointer;
+                    }
+
+                    .image {
+                        margin: 0 auto;
+                        object-fit: contain;
+                        width: 70% !important;
+                        height: 160px !important;
+                    }
+                }
+
+                .card-category-container {
+                    font-size: .8rem;
+                    font-weight: 600;
+                    color: rgb(97, 97, 97);
+
+                    @media (max-width: 1407px) {
+                        font-size: .6rem;
+                    }
+                }
+
+                .card-name-container {
+                    font-size: 1.3rem;
+                    font-weight: 800;
+                    color: rgba(97, 97, 97, 0.753);
+
+                    @media (max-width: 1407px) {
+                        font-size: 1rem;
+                    }
+                }
+
+
+                .card-description-container {
+                    font-size: .6rem;
+                    font-weight: 600;
+                    color: rgba(97, 97, 97, 0.644);
+
+                    @media (max-width: 1407px) {
+                        font-size: .5rem;
+                    }
+                }
+
+                .card-price-container {
+                    div:nth-child(1) {
+                        font-size: 1.4rem;
+                        font-weight: 700;
+                        color: rgb(97, 97, 97);
+
+                        @media (max-width: 1407px) {
+                            font-size: 1rem;
+                        }
+                    }
+
+                    div:nth-child(2) {
+                        font-size: .8rem;
+                        font-weight: 300;
+                        color: rgb(97, 97, 97);
+                    }
+                }
+
+                .card-rate-container {
+                    display: flex;
+                    align-items: center;
+                    font-size: .8rem;
+                    font-weight: 600;
+                    color: rgb(97, 97, 97);
+
+                    @media (max-width: 1407px) {
+                        font-size: .6rem;
+                    }
+
+                    .start-home-icon {
+                        color: #ffca00;
+
+                        @media (max-width: 1407px) {
+                            font-size: .8rem;
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+
+}

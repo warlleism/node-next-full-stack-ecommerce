@@ -1,0 +1,146 @@
+.login-main-cointainer {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Roboto", sans-serif;
+    background-image: linear-gradient(90deg,
+            hsl(228deg 28% 14%) 0%,
+            hsl(228deg 28% 14%) 8%,
+            hsl(228deg 28% 14%) 17%,
+            hsl(228deg 28% 14%) 25%,
+            hsl(228deg 29% 15%) 33%,
+            hsl(228deg 29% 16%) 42%,
+            hsl(228deg 30% 17%) 50%,
+            hsl(228deg 30% 17%) 58%,
+            hsl(228deg 30% 17%) 67%,
+            hsl(228deg 30% 17%) 75%,
+            hsl(228deg 29% 16%) 83%,
+            hsl(228deg 29% 15%) 92%,
+            hsl(228deg 28% 14%) 100%);
+
+    .form-login-cointainer {
+        gap: 20px;
+        width: 500px;
+        height: 600px;
+        display: flex;
+        align-items: center;
+        border-radius: 5px;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #f2f2f2;
+        box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.075);
+
+        @media (max-width: 708px) {
+            width: 500px;
+        }
+
+        @media (max-width: 510px) {
+            width: 400px;
+        }
+
+        .text-login-container {
+            width: 80%;
+            margin-bottom: 30px;
+
+            h1 {
+                display: flex;
+                gap: 10px;
+                font-weight: 500;
+                margin-bottom: 10px;
+                letter-spacing: -1px;
+                color: #1a1a1abd;
+
+                div {
+                    font-weight: 700;
+                    color: #131722;
+                    position: relative;
+                    width: 110px;
+                }
+
+                div::before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    width: 100%;
+                    bottom: 0;
+                    background-color: rgba(255, 255, 255, 0.075);
+                    height: 2px;
+                }
+            }
+
+            div {
+                color: #1a1a1abd;
+                font-weight: 300;
+            }
+        }
+
+        form {
+            width: 80%;
+            color: #1a1a1abd;
+
+            .inputs-login-container {
+                width: 100%;
+                margin-bottom: 10px;
+
+                div {
+                    width: 100%;
+                    margin-bottom: 5px;
+
+                    input {
+                        width: 100%;
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+
+            .checkbox-forgot-container {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                div:nth-child(2) {
+                    text-align: end;
+                    cursor: pointer;
+                    border-bottom: #00000036 solid 1px;
+
+                }
+
+            }
+
+            button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                background-color: #131722;
+                border-radius: 100px;
+                border: navajowhite;
+                font-size: 1.4rem;
+                height: 50px;
+                color: #fff;
+                font-weight: 500;
+                margin-top: 20px;
+                margin-bottom: 50px;
+                cursor: pointer;
+
+            }
+
+            .link {
+                width: 100%;
+                text-align: center;
+
+                a {
+                    text-decoration: none;
+                    color: #1a1a1abd;
+                    font-size: 1rem;
+                    font-weight: 400;
+                }
+            }
+        }
+
+    }
+
+}

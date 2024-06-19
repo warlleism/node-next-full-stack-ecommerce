@@ -1,0 +1,26 @@
+.main-container-detail {
+    width: 90%;
+    margin: 0 auto;
+
+    .container-detail-info {
+        display: flex;
+        width: 100%;
+
+        .container-detail-img {
+            width: 50%;
+            height: 500px;
+          .image-detail{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+
+        .container-detail-buy {
+            width: 50%;
+            height: 500px;
+            background-color: rgba(43, 43, 43, 0.075);
+        }
+    }
+
+}

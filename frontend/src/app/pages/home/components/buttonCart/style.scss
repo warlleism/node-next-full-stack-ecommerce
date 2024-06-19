@@ -1,0 +1,18 @@
+.product-cart {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+    background-color: #16263d;
+    border: none;
+    padding: 10px 0;
+    border-radius: 5px;
+    font-weight: 900;
+    color: #ffff;
+    cursor: pointer;
+
+    .button-card {
+        font-size: 20px;
+    }
+
+}
