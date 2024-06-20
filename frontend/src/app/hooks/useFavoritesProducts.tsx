@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import useUserStore from '../stores/userStorage';
 import useProductStore from '../stores/productStorage';
+import { getValidToken } from '../utils/validToken';
 
 interface UseFavoritesProducts {
     fetchFavorite: ({ product_id }: { product_id: any }) => void;
@@ -17,7 +18,7 @@ const useFavoritesProducts = (): UseFavoritesProducts => {
 
     const fetchFavorite = async ({ product_id }: { product_id: string }): Promise<void> => {
 
-        const token = localStorage.getItem('token');
+        const token = getValidToken();
 
         if (isFetching) {
             return;
