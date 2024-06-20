@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react';
-import { Header } from "@/app/components/header/page";
+import { Header } from "@/app/pages/components/header/page";
 import useProductStore from "@/app/stores/productStorage";
 import './style.scss'
 import Image from "next/image";

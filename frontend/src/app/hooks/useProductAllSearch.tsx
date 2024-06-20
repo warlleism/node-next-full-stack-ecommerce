@@ -2,11 +2,16 @@ import { useRouter } from 'next/navigation';
 import useProductStore from '../stores/productStorage';
 
 const useProductAllSearch = () => {
-    
+
     const route = useRouter()
     const { detailAllProduct, allProducts } = useProductStore();
 
     const handleInputClick = async (value: string) => {
+        
+        if (value.length === 0) {
+            return null
+        }
+
         const page = 1;
         const limit = 30;
         const url = `http://localhost:3001/product/search?page=${page}&limit=${limit}`;

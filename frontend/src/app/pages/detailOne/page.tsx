@@ -1,13 +1,14 @@
 'use client'
 
-import { useEffect } from 'react';
-import { Header } from "@/app/components/header/page";
-import useProductStore from "@/app/stores/productStorage";
 import './style.scss'
 import Image from "next/image";
+import { useEffect } from 'react';
 import StarIcon from '@mui/icons-material/Star';
+import useProductStore from "@/app/stores/productStorage";
+import { Header } from "@/app/pages/components/header/page";
 
-const DetailProduct = () => {
+export default function DetailOneProduct() {
+
     const { product, initializeOneProduct } = useProductStore();
 
     useEffect(() => {
@@ -52,4 +53,3 @@ const DetailProduct = () => {
     );
 }
 
-export default DetailProduct;

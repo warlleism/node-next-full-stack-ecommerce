@@ -67,7 +67,7 @@ export default function Register() {
                             {isLoading ? <CircularProgress size={20} color="inherit" /> : 'Cadastrar'}
                         </button>
                         <div className='link'>
-                            <Link href={'/'}>Login</Link>
+                            <Link href={'/pages/auth/login'}>Login</Link>
                         </div>
                     </form>
                 </div>

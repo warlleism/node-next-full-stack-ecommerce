@@ -4,12 +4,13 @@ import './style.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect } from 'react';
-import { signOut } from 'next-auth/react';
 import useUserStore from '@/app/stores/userStorage';
 import PersonIcon from '@mui/icons-material/Person';
 import useProductSearch from '@/app/hooks/useProductSearch';
 import useProductStore from '@/app/stores/productStorage';
 import useProductAllSearch from '@/app/hooks/useProductAllSearch';
+import ButtonLogout from '../logoutButton/logout';
+
 
 export const Header = () => {
 
@@ -28,10 +29,6 @@ export const Header = () => {
         initializeUser();
     }, [initializeUser]);
 
-    const logout = () => {
-        signOut();
-        localStorage.clear();
-    };
 
     const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -40,7 +37,7 @@ export const Header = () => {
 
     return (
         <div className='main-container-header'>
-            <Link href={'/pages/home'}>Logo</Link>
+            <Link href={'/'}>Logo</Link>
             <div className='search-container'>
                 <form
                     className='input-container'
@@ -89,7 +86,7 @@ export const Header = () => {
                 user !== null ? (
                     <div className='container-logout'>
                         <div> Olá, {user.name}</div> |
-                        <div onClick={logout}>Sair</div>
+                        <ButtonLogout />
                     </div>
                 ) : (
                     <div className='container-login-cadastro'>
@@ -97,9 +94,9 @@ export const Header = () => {
                             <PersonIcon style={{ fontSize: 34 }} />
                         </div>
                         <div className='container-header-links'>
-                            Faça seu{' '}
-                            <Link href={'/pages/auth/login'}>Login</Link> ou crie seu{' '}
-                            <Link href={'/pages/auth/register'}>Cadastro</Link>
+                            Faça seu
+                            <Link href={'/pages/auth/login'}> Login</Link> ou crie seu
+                            <Link href={'/pages/auth/register'}> Cadastro</Link>
                         </div>
                     </div>
                 )

@@ -9,13 +9,19 @@ import { Button } from '../components/buttonCart/button';
 import useProductsWithFavorites from '@/app/hooks/useProductsWithFavorites';
 import FavoriteComponent from '../components/favoriteToggler/toggler';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper-bundle.css';
 import { Navigation, Autoplay } from 'swiper/modules';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
+import useProductStore from '@/app/stores/productStorage';
+import { useRouter } from 'next/navigation';
+import 'swiper/swiper-bundle.css';
+import { ProductData } from '@/app/types/product';
 
 export function RenderProducts() {
+
+    const route = useRouter()
     const { products } = useProductsWithFavorites();
+    const { detailProduct } = useProductStore();
 
     return (
         <>
@@ -35,8 +41,12 @@ export function RenderProducts() {
                         }}
                         modules={[Navigation, Autoplay]}
                     >
-                        {products?.map((item) => (
+                        {products?.map((item: ProductData) => (
                             <SwiperSlide
+                                onClick={() => {
+                                    detailProduct(item)
+                                    route.push('/pages/detailOne')
+                                }}
                                 key={item.id}
                                 className="product-card">
                                 <div className="card-image-container">

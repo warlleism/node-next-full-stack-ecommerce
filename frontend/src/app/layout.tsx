@@ -6,7 +6,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "./utils/react-query";
-import { ReactQueryDevtools } from 'react-query/devtools'
 
 const inter = Inter({ subsets: ["latin"] });
 

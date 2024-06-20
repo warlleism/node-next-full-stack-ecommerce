@@ -42,7 +42,7 @@ export const handleFormSubmit = async ({ data, event, setLoading, setUser }: Sub
             token: result.token,
             name: result.user.name,
             email: result.user.email,
-            callbackUrl: '/pages/home'
+            callbackUrl: '/'
         });
     } catch (error) {
         console.error(error);
