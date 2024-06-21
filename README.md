@@ -1,7 +1,7 @@
 <<<<<<< HEAD
-# Nome do Projeto
+# NEXT ECOMMERCE
 
-Uma breve descrição do que seu projeto faz e por que ele é útil.
+Este é um projeto de uma ecommerce fullstack!
 
 ## Índice
 
