@@ -8,9 +8,9 @@ import useUserStore from '@/app/stores/userStorage';
 import { Typewriter } from 'react-simple-typewriter'
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import CustomTextField from '../components/inputController';
+import CustomTextField from '../components/inputTextController/inputController';
 import { handleFormSubmit } from '@/app/utils/userLoginUtil';
-import PasswordCustomTextField from '../components/passwordInputController';
+import PasswordCustomTextField from '../components/inputPasswordController/passwordInputController';
 import { Checkbox, CircularProgress, FormControlLabel, FormGroup } from '@mui/material';
 
 const schema = z.object({

@@ -51,7 +51,7 @@ export function RenderProducts() {
                                     <Image
                                         onClick={() => {
                                             detailProduct(item)
-                                            route.push('/pages/detailOne')
+                                            route.push('/pages/detail/detailOne')
                                         }}
                                         className="image"
                                         objectFit="cover"

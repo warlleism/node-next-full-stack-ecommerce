@@ -11,25 +11,23 @@ import useProductStore from '@/app/stores/productStorage';
 import useProductAllSearch from '@/app/hooks/useProductAllSearch';
 import ButtonLogout from '../logoutButton/logout';
 import ecommerceIcon from '../../../assets/ecommece-logo.png'
+import LocalMallIcon from '@mui/icons-material/LocalMall';
+import useCartStore from '@/app/stores/cartStorage';
 
 
 export const Header = () => {
 
     const { detailProduct } = useProductStore();
+    const { cart, initializeCart } = useCartStore();
     const { user, initializeUser } = useUserStore();
-    const {
-        error,
-        products,
-        inputRef,
-        handleInputChange,
-        inputRefContainer } = useProductSearch()
-
     const { handleInputClick } = useProductAllSearch()
+    const { error, products, inputRef, handleInputChange, inputRefContainer } = useProductSearch()
+
 
     useEffect(() => {
         initializeUser();
+        initializeCart();
     }, [initializeUser]);
-
 
     const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -110,7 +108,11 @@ export const Header = () => {
                     </div>
                 )
             }
-        </div >
+            <div className='container-header-bag-number'>
+                <div>{cart?.length}</div>
+                <LocalMallIcon />
+            </div>
+        </div>
     );
 };
 

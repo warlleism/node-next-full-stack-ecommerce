@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Nome do Projeto
 
-## Getting Started
+Uma breve descrição do que seu projeto faz e por que ele é útil.
 
-First, run the development server:
+## Índice
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- [Visão Geral](#visão-geral)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Instalação](#instalação)
+- [Uso](#uso)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Visão Geral
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Aqui você pode detalhar mais sobre seu projeto, incluindo os principais recursos e funcionalidades. Se possível, inclua capturas de tela ou GIFs do projeto em ação.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Tecnologias Utilizadas
 
-## Learn More
+Liste as principais tecnologias e frameworks utilizados no projeto.
 
-To learn more about Next.js, take a look at the following resources:
+- Frontend:
+  - [Nextjs](https://nextjs.org/)
+  - [Zustand](https://github.com/pmndrs/zustand)
+  - [NextAuth](https://next-auth.js.org/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Backend:
+  - [Node.js](https://nodejs.org/)
+  - [Express](https://expressjs.com/)
+  - [PostgreSQL](https://www.postgresql.org/)
+  - [TypeOrm](https://typeorm.io/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Outros:
+  - [Jest](https://jestjs.io/)
 
-## Deploy on Vercel
+## Instalação
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Instruções sobre como configurar o ambiente de desenvolvimento local.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Clone o repositório:
+    ```bash
+    git clone https://github.com/seu-usuario/nome-do-projeto.git
+    ```
+2. Navegue até o diretório do projeto:
+    ```bash
+    cd nome-do-projeto
+    ```
+3. Instale as dependências do backend:
+    ```bash
+    cd backend
+    npm install
+    ```
+4. Instale as dependências do frontend:
+    ```bash
+    cd ../frontend
+    npm install
+    ```
+
+## Uso
+
+Instruções para rodar o projeto em ambiente de desenvolvimento.
+
+1. Configurar .env:
+    ```bash
+    crie um arquivo .env
+    copie os dados em example.env e cole em .env
+    configure o nome do seu banco de dados (DB_NAME)
+    configure a porta do seu banco de dados (DB_PORT) - opcional
+    configure a senha do seu banco de dados (DB_PASS)
+    ```
+
+1. Execute as migrations:
+    ```bash
+    cd backend
+    migration:generate
+    migration:run
+    ```
+
+1. Inicie o servidor backend:
+    ```bash
+    cd backend
+    npm run dev
+    ```
+
+2. Inicie o servidor frontend:
+    ```bash
+    cd ../frontend
+    npm run dev
+    ```
+
+O projeto backend estará disponível em `http://localhost:3001` (ou na porta configurada).
+
+

@@ -5,6 +5,7 @@ export interface Product {
 }
 
 export interface ProductData {
+    userId?: number;
     id: number;
     name: string;
     image: string;

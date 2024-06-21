@@ -29,7 +29,7 @@ const useProductAllSearch = () => {
 
             const data = await response.json();
             detailAllProduct(data?.data);
-            route.push('/pages/detailAll')
+            route.push('/pages/detail/detailAll')
         } catch (error) {
             console.error('Erro ao buscar produtos:', error);
         }

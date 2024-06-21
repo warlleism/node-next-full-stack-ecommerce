@@ -4,13 +4,13 @@ import { z } from 'zod';
 import './style.scss'
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import CustomTextField from '../components/inputController';
+import CustomTextField from '../components/inputTextController/inputController';
 import { CircularProgress } from '@mui/material';
 import { useState } from 'react';
 import { Typewriter } from 'react-simple-typewriter';
 import Link from 'next/link';
 import { handleFormSubmit } from '@/app/utils/userRegisterUtil';
-import PasswordCustomTextField from '../components/passwordInputController';
+import PasswordCustomTextField from '../components/inputPasswordController/passwordInputController';
 import useUserStore from '@/app/stores/userStorage';
 
 const schema = z.object({
