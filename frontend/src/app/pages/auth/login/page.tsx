@@ -66,9 +66,9 @@ export default function Login() {
                                 <FormControlLabel
                                     control={<Checkbox
                                         sx={{
-                                            color: '#131722',
+                                            color: '#ff7e33',
                                             '&.Mui-checked': {
-                                                color: '#131722',
+                                                color: '#ff7e33',
                                             },
                                         }} defaultChecked />}
                                     label="Lembrar senha" />

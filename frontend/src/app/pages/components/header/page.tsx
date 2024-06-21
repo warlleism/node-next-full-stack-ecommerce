@@ -10,6 +10,7 @@ import useProductSearch from '@/app/hooks/useProductSearch';
 import useProductStore from '@/app/stores/productStorage';
 import useProductAllSearch from '@/app/hooks/useProductAllSearch';
 import ButtonLogout from '../logoutButton/logout';
+import ecommerceIcon from '../../../assets/ecommece-logo.png'
 
 
 export const Header = () => {
@@ -37,7 +38,15 @@ export const Header = () => {
 
     return (
         <div className='main-container-header'>
-            <Link href={'/'}>Logo</Link>
+            <Link href={'/'} className='container-image'>
+                <Image
+                    className='image'
+                    src={ecommerceIcon}
+                    objectFit='contain'
+                    alt='logo'
+                    width={50}
+                    height={50} />
+            </Link>
             <div className='search-container'>
                 <form
                     className='input-container'

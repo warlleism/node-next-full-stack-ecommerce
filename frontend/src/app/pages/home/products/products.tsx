@@ -20,8 +20,8 @@ import { ProductData } from '@/app/types/product';
 export function RenderProducts() {
 
     const route = useRouter()
-    const { products } = useProductsWithFavorites();
     const { detailProduct } = useProductStore();
+    const { products } = useProductsWithFavorites();
 
     return (
         <>
@@ -43,15 +43,16 @@ export function RenderProducts() {
                     >
                         {products?.map((item: ProductData) => (
                             <SwiperSlide
-                                onClick={() => {
-                                    detailProduct(item)
-                                    route.push('/pages/detailOne')
-                                }}
                                 key={item.id}
                                 className="product-card">
-                                <div className="card-image-container">
+                                <div
+                                    className="card-image-container">
                                     <FavoriteComponent id={item.id} />
                                     <Image
+                                        onClick={() => {
+                                            detailProduct(item)
+                                            route.push('/pages/detailOne')
+                                        }}
                                         className="image"
                                         objectFit="cover"
                                         alt={item.name}

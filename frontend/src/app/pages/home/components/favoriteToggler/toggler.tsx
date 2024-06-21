@@ -22,7 +22,7 @@ const FavoriteComponent = ({ id }: any) => {
         <FavoriteIcon
             className='card-icon-favorite'
             onClick={() => redirectUserFavorite(String(id))}
-            style={{ color: favorite?.includes(id) ? '#16263d' : '#777777c7' }} />
+            style={{ color: favorite?.includes(id) ? '#ff7e33' : '#777777c7' }} />
     );
 };
 

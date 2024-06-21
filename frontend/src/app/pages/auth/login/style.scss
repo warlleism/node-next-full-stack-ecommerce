@@ -5,20 +5,32 @@
     align-items: center;
     justify-content: center;
     font-family: "Roboto", sans-serif;
-    background-image: linear-gradient(90deg,
-            hsl(228deg 28% 14%) 0%,
-            hsl(228deg 28% 14%) 8%,
-            hsl(228deg 28% 14%) 17%,
-            hsl(228deg 28% 14%) 25%,
-            hsl(228deg 29% 15%) 33%,
-            hsl(228deg 29% 16%) 42%,
-            hsl(228deg 30% 17%) 50%,
-            hsl(228deg 30% 17%) 58%,
-            hsl(228deg 30% 17%) 67%,
-            hsl(228deg 30% 17%) 75%,
-            hsl(228deg 29% 16%) 83%,
-            hsl(228deg 29% 15%) 92%,
-            hsl(228deg 28% 14%) 100%);
+    background-image: linear-gradient(65deg,
+            hsl(218deg 56% 30%) 1%,
+            hsl(218deg 56% 30%) 31%,
+            hsl(218deg 56% 30%) 39%,
+            hsl(218deg 56% 30%) 44%,
+            hsl(218deg 56% 30%) 47%,
+            hsl(218deg 56% 30%) 49%,
+            hsl(218deg 56% 30%) 50%,
+            hsl(218deg 56% 30%) 51%,
+            hsl(218deg 56% 30%) 51%,
+            hsl(218deg 56% 30%) 51%,
+            hsl(218deg 56% 30%) 51%,
+            hsl(218deg 56% 30%) 50%,
+            hsl(218deg 56% 30%) 50%,
+            hsl(257deg 32% 41%) 50%,
+            hsl(299deg 34% 41%) 49%,
+            hsl(327deg 47% 50%) 49%,
+            hsl(344deg 72% 58%) 49%,
+            hsl(3deg 92% 65%) 49%,
+            hsl(22deg 100% 60%) 50%,
+            hsl(22deg 100% 60%) 51%,
+            hsl(22deg 100% 60%) 53%,
+            hsl(22deg 100% 60%) 56%,
+            hsl(22deg 100% 60%) 61%,
+            hsl(22deg 100% 60%) 69%,
+            hsl(22deg 100% 60%) 99%);
 
     .form-login-cointainer {
         gap: 20px;
@@ -54,7 +66,7 @@
 
                 div {
                     font-weight: 700;
-                    color: #131722;
+                    color: #ff7e33;
                     position: relative;
                     width: 110px;
                 }
@@ -115,7 +127,6 @@
                 justify-content: center;
                 align-items: center;
                 width: 100%;
-                background-color: #131722;
                 border-radius: 100px;
                 border: navajowhite;
                 font-size: 1.4rem;
@@ -125,7 +136,32 @@
                 margin-top: 20px;
                 margin-bottom: 50px;
                 cursor: pointer;
-
+                background-image: linear-gradient(295deg,
+                        hsl(218deg 56% 30%) 1%,
+                        hsl(218deg 56% 30%) 31%,
+                        hsl(218deg 56% 30%) 39%,
+                        hsl(218deg 56% 30%) 44%,
+                        hsl(218deg 56% 30%) 47%,
+                        hsl(218deg 56% 30%) 49%,
+                        hsl(218deg 56% 30%) 50%,
+                        hsl(218deg 56% 30%) 51%,
+                        hsl(218deg 56% 30%) 51%,
+                        hsl(218deg 56% 30%) 51%,
+                        hsl(218deg 56% 30%) 51%,
+                        hsl(218deg 56% 30%) 50%,
+                        hsl(218deg 56% 30%) 50%,
+                        hsl(257deg 32% 41%) 50%,
+                        hsl(299deg 34% 41%) 49%,
+                        hsl(327deg 47% 50%) 49%,
+                        hsl(344deg 72% 58%) 49%,
+                        hsl(3deg 92% 65%) 49%,
+                        hsl(22deg 100% 60%) 50%,
+                        hsl(22deg 100% 60%) 51%,
+                        hsl(22deg 100% 60%) 53%,
+                        hsl(22deg 100% 60%) 56%,
+                        hsl(22deg 100% 60%) 61%,
+                        hsl(22deg 100% 60%) 69%,
+                        hsl(22deg 100% 60%) 99%);
             }
 
             .link {
