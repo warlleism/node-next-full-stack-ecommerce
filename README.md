@@ -18,14 +18,14 @@ Aqui você pode detalhar mais sobre seu projeto, incluindo os principais recurso
 Liste as principais tecnologias e frameworks utilizados no projeto.
 
 - Frontend:
-  - [Nextjs](https://nextjs.org/))
-  - [Zustand](https://github.com/pmndrs/zustand))
-  - [NextAuth](https://next-auth.js.org/))
+  - [Nextjs](https://nextjs.org/)
+  - [Zustand](https://github.com/pmndrs/zustand)
+  - [NextAuth](https://next-auth.js.org/)
 
 - Backend:
   - [Node.js](https://nodejs.org/)
   - [Express](https://expressjs.com/)
-  - [PostgreSQL](https://www.postgresql.org/))
+  - [PostgreSQL](https://www.postgresql.org/)
   - [TypeOrm](https://typeorm.io/)
 
 - Outros:
