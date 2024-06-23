@@ -17,6 +17,7 @@
     "@mui/material": "^5.15.20",
     "@mui/material-nextjs": "^5.15.11",
     "@tanstack/react-query": "^5.45.0",
+    "@types/dom-view-transitions": "^1.0.4",
     "cookies-next": "^4.2.1",
     "js-cookie": "^3.0.5",
     "next": "14.2.3",
