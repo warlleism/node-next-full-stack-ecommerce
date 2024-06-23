@@ -6,6 +6,7 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import './style.scss';
 
 export default function Cart() {
+
     const [itens, setItens] = useState([
         { id: 1, name: 'teste1' },
         { id: 2, name: 'teste2' },
@@ -28,7 +29,6 @@ export default function Cart() {
 
     return (
         <>
-            <Header />
             <button onClick={() => add()}>Adicionar</button>
             <TransitionGroup component="ul" className="item-list">
                 {itens.map((item) => (

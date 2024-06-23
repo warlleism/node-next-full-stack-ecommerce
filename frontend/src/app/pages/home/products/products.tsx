@@ -4,7 +4,7 @@ import './style.scss';
 import Image from 'next/image';
 import StarIcon from '@mui/icons-material/Star';
 import StarHalfIcon from '@mui/icons-material/StarHalf';
-import { Tooltip } from '@mui/material';
+import { Drawer, Tooltip } from '@mui/material';
 import { Button } from '../components/buttonCart/button';
 import useProductsWithFavorites from '@/app/hooks/useProductsWithFavorites';
 import FavoriteComponent from '../components/favoriteToggler/toggler';
@@ -16,12 +16,15 @@ import useProductStore from '@/app/stores/productStorage';
 import { useRouter } from 'next/navigation';
 import 'swiper/swiper-bundle.css';
 import { ProductData } from '@/app/types/product';
+import useCartStore from '@/app/stores/cartStorage';
+import Cart from '../../cart/page';
 
 export function RenderProducts() {
 
     const route = useRouter()
     const { detailProduct } = useProductStore();
     const { products } = useProductsWithFavorites();
+    const { show, showCart } = useCartStore()
 
     return (
         <>
@@ -87,6 +90,12 @@ export function RenderProducts() {
                     <ArrowCircleRightIcon className="swiper-button swiper-button-next-custom" />
                 </div>
             </div>
+            <Drawer
+                anchor={'right'}
+                open={show} onClose={() => showCart()}>
+                <Cart />
+            </Drawer>
+
         </>
     );
 }

@@ -13,7 +13,7 @@ export function Button({ data }: { data: ProductData }) {
     const route = useRouter();
     const { user } = useUserStore()
     const { id, name, category, description, price, rate, image } = data;
-    const { cart, addProductToCart, initializeCart } = useCartStore();
+    const { cart, addProductToCart, initializeCart, showCart } = useCartStore();
     const isInCart = cart.some(item => item.id === id && item.userId === user?.id);
 
     useEffect(() => {
@@ -23,15 +23,16 @@ export function Button({ data }: { data: ProductData }) {
     const handleClick = () => {
         if (isInCart) {
             if (user) {
-                route.push('/pages/cart');
+                showCart()
+                // route.push('/pages/cart');
             }
             else {
                 route.push('/pages/auth/login')
             }
         } else {
             if (user) {
+                showCart()
                 addProductToCart({ ...data, userId: user?.id, qtd: 1 });
-
             } else {
                 route.push('/pages/auth/login')
             }

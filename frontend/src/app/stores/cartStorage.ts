@@ -5,6 +5,8 @@ import { ProductData } from '../types/product';
 
 interface ProductState {
   cart: ProductData[];
+  show: boolean;
+  showCart: () => void;
   addProductToCart: (product: ProductData) => void;
   removeProductFromCart: (productId: number) => void;
   initializeCart: () => void;
@@ -12,6 +14,12 @@ interface ProductState {
 
 const useCartStore = create<ProductState>((set) => ({
   cart: [],
+  show: false,
+  showCart: () => {
+    set((state) => ({
+      show: !state.show
+    }));
+  },
   initializeCart: () => {
     if (typeof window !== 'undefined') {
       const storedCart = localStorage.getItem('cart');
