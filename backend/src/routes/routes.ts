@@ -3,6 +3,7 @@ import { UserController } from "../controllers/userController";
 import { authMiddleware } from "../middlewares/authMiddleware";
 import { ProductController } from "../controllers/productController";
 import { FavoriteController } from "../controllers/favoriteController";
+import { SaleController } from "../controllers/saleController";
 const routes = Router()
 
 routes.post('/user/register', new UserController().create)
@@ -18,5 +19,6 @@ routes.post('/favorite/create', authMiddleware, new FavoriteController().create)
 routes.delete('/favorite/delete', authMiddleware, new FavoriteController().delete)
 routes.post('/favorite/all', authMiddleware, new FavoriteController().get)
 
+routes.get('/sale/all', new SaleController().get)
 
 export default routes;

@@ -51,12 +51,11 @@
 
 
     .search-container {
-        position: relative;
-        width: 700px;
-        background-color: green;
         padding: 0;
         margin: 0;
         height: 30px;
+        width: 700px;
+        position: relative;
 
         .input-container {
             height: 100%;
@@ -161,17 +160,18 @@
         cursor: pointer;
 
         div {
-            position: absolute;
             top: -13px;
-            right: -13px;
-            background: #fc6500;
-            height: 21px;
             width: 21px;
-            font-weight: 600;
+            height: 21px;
+            right: -13px;
             display: flex;
+            font-size: .9rem;
+            font-weight: 600;
+            position: absolute;
             align-items: center;
-            justify-content: center;
             border-radius: 100px;
+            background: #fc6500;
+            justify-content: center;
         }
     }
 

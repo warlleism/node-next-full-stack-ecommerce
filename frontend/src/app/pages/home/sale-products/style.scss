@@ -1,13 +1,14 @@
-.main-our-products-container {
+.main-sale-our-products-container {
     margin: 0 auto;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background-color: #224177;
     gap: 20px;
 
 
-    .text-our-products-container {
+    .text-sale-our-products-container {
         font-size: 1.5rem;
         font-weight: 800;
         color: #fff;

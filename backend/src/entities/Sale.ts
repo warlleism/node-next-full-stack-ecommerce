@@ -4,15 +4,15 @@ import {
     PrimaryGeneratedColumn,
 } from 'typeorm'
 
-@Entity('favorites')
-export class Favorite {
+@Entity('sales')
+export class Sale {
     @PrimaryGeneratedColumn()
     id: number
 
     @Column({ type: 'text' })
-    user_id: number
+    product_id: number
 
     @Column({ type: 'text' })
-    product_id: number
+    sale: number
 
 }
