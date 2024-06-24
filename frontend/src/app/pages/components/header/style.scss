@@ -187,3 +187,21 @@
         }
     }
 }
+
+
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.container-header-bag-number.animated {
+    animation: bounce 0.3s ease-in-out;
+}

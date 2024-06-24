@@ -4,10 +4,12 @@ import { create } from 'zustand';
 import { ProductData } from '../types/product';
 
 interface ProductState {
+  fullPrice: number | string;
   show: boolean;
   cart: ProductData[];
   showCart: () => void;
   initializeCart: () => void;
+  calculatePrice: () => void;
   incrementQuantity: (productId: number) => void;
   decrementQuantity: (productId: number) => void;
   addProductToCart: (product: ProductData) => void;
@@ -16,7 +18,9 @@ interface ProductState {
 
 const useCartStore = create<ProductState>((set) => ({
   cart: [],
+  fullPrice: 0,
   show: false,
+  
   showCart: () => {
     set((state) => ({
       show: !state.show
@@ -88,6 +92,20 @@ const useCartStore = create<ProductState>((set) => ({
       return { cart: updatedCart };
     });
   },
+  calculatePrice: () => {
+    set((state) => {
+      const reducePrice = state.cart.reduce((acumulador: number, valorAtual: ProductData) => {
+        const price = typeof valorAtual.cartPrice === 'string'
+          ? parseFloat(valorAtual.cartPrice)
+          : typeof valorAtual.cartPrice === 'number'
+            ? valorAtual.cartPrice
+            : 0;
+        return acumulador + price;
+      }, 0);
+
+      return { fullPrice: reducePrice };
+    })
+  }
 
 }));
 

@@ -3,7 +3,7 @@
 import './style.scss';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import useUserStore from '@/app/stores/userStorage';
 import PersonIcon from '@mui/icons-material/Person';
 import useProductSearch from '@/app/hooks/useProductSearch';
@@ -14,21 +14,27 @@ import ecommerceIcon from '../../../assets/ecommece-logo.png'
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import useCartStore from '@/app/stores/cartStorage';
 
+export function Header() {
 
-export const Header = () => {
-
-
+    const [animate, setAnimate] = useState(false);
     const { detailProduct } = useProductStore();
     const { user, initializeUser } = useUserStore();
     const { handleInputClick } = useProductAllSearch()
     const { cart, initializeCart, showCart } = useCartStore();
     const { error, products, inputRef, handleInputChange, inputRefContainer } = useProductSearch()
 
-
     useEffect(() => {
         initializeUser();
         initializeCart();
     }, [initializeUser]);
+
+    useEffect(() => {
+        if (cart.length > 0) {
+            setAnimate(true);
+            const timer = setTimeout(() => setAnimate(false), 300);
+            return () => clearTimeout(timer);
+        }
+    }, [cart.length]);
 
     const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -109,7 +115,10 @@ export const Header = () => {
                     </div>
                 )
             }
-            <div className='container-header-bag-number' onClick={() => showCart()}>
+            <div
+                id='qtd-cart'
+                className={`container-header-bag-number ${animate ? 'animated' : ''}`}
+                onClick={() => showCart()}>
                 <div>{cart?.length}</div>
                 <LocalMallIcon />
             </div>

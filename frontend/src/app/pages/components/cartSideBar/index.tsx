@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation';
 import useProductStore from '@/app/stores/productStorage';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import CloseIcon from '@mui/icons-material/Close';
+import { useEffect } from 'react';
 
 export default function CartSideBar() {
 
@@ -19,11 +20,18 @@ export default function CartSideBar() {
     const { detailProduct } = useProductStore();
     const {
         show,
-        showCart,
         cart,
-        removeProductFromCart,
+        showCart,
+        fullPrice,
+        calculatePrice,
+        decrementQuantity,
         incrementQuantity,
-        decrementQuantity } = useCartStore()
+        removeProductFromCart,
+    } = useCartStore()
+
+    useEffect(() => {
+        calculatePrice()
+    }, [cart]);
 
     return (
         <Drawer
@@ -84,7 +92,7 @@ export default function CartSideBar() {
             </TransitionGroup>
 
             <div className='container-finalize-purchase'>
-                <div className='container-cart-total'>Valor Total: R$50000</div>
+                <div className='container-cart-total'>Valor Total: R${fullPrice}</div>
                 <div className='container-cart-finalize'>
                     <AccountBalanceWalletIcon className='icon-purchase' />
                     <div>

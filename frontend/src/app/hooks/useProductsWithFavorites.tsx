@@ -8,7 +8,7 @@ const useProductsWithFavorites = () => {
 
     const { addToFavorite } = useProductStore();
     const [pages, setPages] = useState(1);
-    const [qtdItens, setQtdItens] = useState(7);
+    const [qtdItens, setQtdItens] = useState(17);
 
     const fetchProducts = useMemo(() => async () => {
         const token = getValidToken();

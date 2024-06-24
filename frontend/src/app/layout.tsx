@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "./utils/react-query";
-import CartSideBar from "./pages/components/cartSideBar/page";
+import CartSideBar from "./pages/components/cartSideBar";
 
 const inter = Inter({ subsets: ["latin"] });
 

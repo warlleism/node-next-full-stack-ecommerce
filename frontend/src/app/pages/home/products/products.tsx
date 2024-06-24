@@ -27,19 +27,19 @@ export function RenderProducts() {
         <>
             <div className="container-cards">
                 <div className='container-caroussel'>
-                    <ArrowCircleLeftIcon className="swiper-button swiper-button-prev-custom" />
+                    <ArrowCircleLeftIcon id='swiper-button-prev-custom' className="swiper-button" />
                     <Swiper
                         className='carousel'
                         spaceBetween={10}
                         slidesPerView={5}
-                        loop={true}
+                        slidesPerGroup={1}
                         pagination={{ clickable: true }}
-                        autoplay={{ delay: 3000, disableOnInteraction: false }}
                         navigation={{
-                            nextEl: '.swiper-button-next-custom',
-                            prevEl: '.swiper-button-prev-custom'
+                            nextEl: '#swiper-button-next-custom',
+                            prevEl: '#swiper-button-prev-custom'
                         }}
-                        modules={[Navigation, Autoplay]}
+                        breakpoints={{ 768: { slidesPerView: 5 }, 100: { slidesPerView: 1 } }}
+                        modules={[Navigation]}
                     >
                         {products?.map((item: ProductData) => (
                             <SwiperSlide
@@ -84,7 +84,7 @@ export function RenderProducts() {
                             </SwiperSlide>
                         ))}
                     </Swiper>
-                    <ArrowCircleRightIcon className="swiper-button swiper-button-next-custom" />
+                    <ArrowCircleRightIcon id='swiper-button-next-custom' className="swiper-button" />
                 </div>
             </div>
         </>
