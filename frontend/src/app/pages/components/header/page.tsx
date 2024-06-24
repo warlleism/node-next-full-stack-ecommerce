@@ -17,10 +17,11 @@ import useCartStore from '@/app/stores/cartStorage';
 
 export const Header = () => {
 
+
     const { detailProduct } = useProductStore();
-    const { cart, initializeCart } = useCartStore();
     const { user, initializeUser } = useUserStore();
     const { handleInputClick } = useProductAllSearch()
+    const { cart, initializeCart, showCart } = useCartStore();
     const { error, products, inputRef, handleInputChange, inputRefContainer } = useProductSearch()
 
 
@@ -108,7 +109,7 @@ export const Header = () => {
                     </div>
                 )
             }
-            <div className='container-header-bag-number'>
+            <div className='container-header-bag-number' onClick={() => showCart()}>
                 <div>{cart?.length}</div>
                 <LocalMallIcon />
             </div>

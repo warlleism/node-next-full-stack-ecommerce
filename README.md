@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # NEXT ECOMMERCE
 
 Este é um projeto de uma ecommerce fullstack!
@@ -89,6 +88,4 @@ Instruções para rodar o projeto em ambiente de desenvolvimento.
 
 O projeto backend estará disponível em `http://localhost:3001` (ou na porta configurada).
 
-=======
->>>>>>> d4ee30f5aafec2dbec5619c76ae300b9f0d8d2a9
 

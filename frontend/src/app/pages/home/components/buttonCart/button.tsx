@@ -24,7 +24,6 @@ export function Button({ data }: { data: ProductData }) {
         if (isInCart) {
             if (user) {
                 showCart()
-                // route.push('/pages/cart');
             }
             else {
                 route.push('/pages/auth/login')
@@ -32,7 +31,7 @@ export function Button({ data }: { data: ProductData }) {
         } else {
             if (user) {
                 showCart()
-                addProductToCart({ ...data, userId: user?.id, qtd: 1 });
+                addProductToCart({ ...data, cartPrice: price, userId: user?.id, qtd: 1 });
             } else {
                 route.push('/pages/auth/login')
             }

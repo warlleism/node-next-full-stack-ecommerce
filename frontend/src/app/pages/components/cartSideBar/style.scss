@@ -1,0 +1,176 @@
+.MuiPaper-root {
+    width: 700px;
+    background-color: #f2f2f2;
+
+    @media (max-width: 1530px) {
+        width: 500px;
+    }
+}
+
+.container-itens-cart {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    overflow: hidden;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    justify-content: space-around;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+
+    .cart-container-name {
+        width: 150px;
+        cursor: pointer;
+        font-weight: 700;
+        text-align: center;
+
+    }
+
+    .cart-container-price {
+        width: 150px;
+        text-align: center;
+    }
+
+    .cart-icon-trash {
+        cursor: pointer;
+        font-size: 1.3rem;
+        transition: .5s ease-in-out;
+        color: rgba(0, 0, 0, 0.267);
+    }
+
+    .cart-icon-trash:hover {
+        color: rgba(75, 75, 75, 0.795);
+    }
+
+    .image-cart {
+        width: 60px;
+        height: 50px;
+        object-fit: contain;
+    }
+
+    .container-cart-qtd {
+
+        width: 70px;
+        height: 30px;
+        display: flex;
+        border-radius: 5px;
+        align-items: center;
+        color: rgba(0, 0, 0, 0.705);
+        border: solid 1.5px rgba(0, 0, 0, 0.062);
+
+        .cart-number-qtd {
+            display: flex;
+            height: 100%;
+            width: 33.3%;
+            font-size: .9rem;
+            align-items: center;
+            justify-content: center;
+            border-left: solid 1.5px rgba(0, 0, 0, 0.062);
+            border-right: solid 1.5px rgba(0, 0, 0, 0.062);
+        }
+
+        .icon-container-qtd {
+            width: 33.3%;
+            display: flex;
+            font-size: 1rem;
+            cursor: pointer;
+            align-items: center;
+            border-radius: 100px;
+            justify-content: center;
+
+            .cart-icon-qtd {
+                font-size: 1rem;
+                border-radius: 100px;
+                transition: .5s ease-in-out;
+            }
+
+            .card-icon-qtd:hover {
+                background-color: rgba(0, 0, 0, 0.089);
+            }
+        }
+    }
+
+
+
+    .item-enter {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    .item-enter-active {
+        opacity: 1;
+        transform: translateX(0);
+        transition: opacity 300ms, transform 300ms;
+    }
+
+    .item-exit {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .item-exit-active {
+        opacity: 0;
+        transform: translateX(20px);
+        transition: opacity 300ms, transform 300ms;
+    }
+}
+
+.container-finalize-purchase:hover {
+    opacity: 1;
+}
+
+.container-finalize-purchase {
+    bottom: 0;
+    width: 700px;
+    height: 80px;
+    display: flex;
+    opacity: .9;
+    cursor: pointer;
+    position: fixed;
+    color: #f2f2f2;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: .5s ease-in-out;
+    background-image: linear-gradient(245deg,
+            hsl(218deg 56% 30%) 1%,
+            hsl(218deg 56% 30%) 31%,
+            hsl(218deg 56% 30%) 39%,
+            hsl(218deg 56% 30%) 44%,
+            hsl(218deg 56% 30%) 47%,
+            hsl(218deg 56% 30%) 49%,
+            hsl(218deg 56% 30%) 50%,
+            hsl(218deg 56% 30%) 51%,
+            hsl(218deg 56% 30%) 51%,
+            hsl(218deg 56% 30%) 51%,
+            hsl(218deg 56% 30%) 51%,
+            hsl(218deg 56% 30%) 50%,
+            hsl(218deg 56% 30%) 50%,
+            hsl(257deg 32% 41%) 50%,
+            hsl(299deg 34% 41%) 49%,
+            hsl(327deg 47% 50%) 49%,
+            hsl(344deg 72% 58%) 49%,
+            hsl(3deg 92% 65%) 49%,
+            hsl(22deg 100% 60%) 50%,
+            hsl(22deg 100% 60%) 51%,
+            hsl(22deg 100% 60%) 53%,
+            hsl(22deg 100% 60%) 56%,
+            hsl(22deg 100% 60%) 61%,
+            hsl(22deg 100% 60%) 69%,
+            hsl(22deg 100% 60%) 99%);
+
+
+    @media (max-width: 1530px) {
+        width: 500px;
+    }
+
+    .icon-purchase {
+        font-size: 3rem;
+    }
+
+
+    div:nth-child(2) {
+        font-size: 2rem;
+    }
+}

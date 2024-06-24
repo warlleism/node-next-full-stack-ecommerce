@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "./utils/react-query";
+import CartSideBar from "./pages/components/cartSideBar/page";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,6 +15,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
   return (
     <>
       <QueryClientProvider client={queryClient}>
@@ -21,6 +24,7 @@ export default function RootLayout({
           <body className={inter.className}>
             {children}
             <ToastContainer />
+            <CartSideBar />
           </body>
         </html>
       </QueryClientProvider>
