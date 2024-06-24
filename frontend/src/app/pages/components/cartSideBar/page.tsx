@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import useProductStore from '@/app/stores/productStorage';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function CartSideBar() {
 
@@ -29,7 +30,15 @@ export default function CartSideBar() {
             anchor={'right'}
             open={show}
             onClose={() => showCart()}>
-            <TransitionGroup>
+            <div className='container-close-cart'>
+                <div>
+                    CARRINHO
+                </div>
+                <div>
+                    <CloseIcon className='icon-close-cart' onClick={() => showCart()} />
+                </div>
+            </div>
+            <TransitionGroup className='container-cart-list-itens'>
                 {cart.map((item) => (
                     <CSSTransition
                         key={item.id}
@@ -75,9 +84,12 @@ export default function CartSideBar() {
             </TransitionGroup>
 
             <div className='container-finalize-purchase'>
-                <AccountBalanceWalletIcon className='icon-purchase' />
-                <div>
-                    Finalizar Compra
+                <div className='container-cart-total'>Valor Total: R$50000</div>
+                <div className='container-cart-finalize'>
+                    <AccountBalanceWalletIcon className='icon-purchase' />
+                    <div>
+                        Finalizar Compra
+                    </div>
                 </div>
             </div>
 
