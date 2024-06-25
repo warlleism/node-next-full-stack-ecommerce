@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { productRepository } from "../repositories/productRepository";
-import { BadRequestError, Base64Error, UnauthorizedError } from "../helpers/api-erros";
+import { BadRequestError, UnauthorizedError } from "../helpers/api-erros";
 import { deleteImage, saveImageToFile } from "../utils/fileUtils";
 import { favoriteRepository } from "../repositories/favoriteRepository";
 import { JwtPayload } from "jsonwebtoken";
@@ -48,7 +48,6 @@ export class ProductController {
         const page = parseInt(req.query.page as string) || 1;
         const limit = parseInt(req.query.limit as string) || 10;
 
-
         if (typeof authorization !== 'undefined') {
             const token = authorization.split(' ')[1];
 
@@ -56,8 +55,7 @@ export class ProductController {
                 try {
                     const { id } = jwt.verify(token, process.env.JWT_PASS ?? '') as JwtPayload;
                     const favoriteExists = await favoriteRepository.findBy({ user_id: id });
-                    const productArray: number[] = [];
-                    const productMap = favoriteExists.map((e) => { productArray.push(e.product_id) });
+                    const productMap = favoriteExists.map((e) => e.product_id);
 
                     const [products, total] = await productRepository.findAndCount({
                         skip: (page - 1) * limit,
@@ -77,7 +75,7 @@ export class ProductController {
                     return res.status(200).json({
                         message: "All products with images!",
                         data: allProducts,
-                        favorites: productArray,
+                        favorites: productMap,
                         currentPage: page,
                         totalPages: Math.ceil(total / limit),
                     });
@@ -110,7 +108,6 @@ export class ProductController {
         }
     }
 
-
     async getSearch(req: Request, res: Response) {
         const { search } = req.body;
 
@@ -122,13 +119,9 @@ export class ProductController {
         }
 
         const products = await productRepository.find();
-        const filteredProducts = products.filter(product =>
-            product.name.toLowerCase().includes(search.toLowerCase())
-        );
+        const filteredProducts = products.filter(product => product.name.toLowerCase().includes(search.toLowerCase()));
 
-        if (filteredProducts.length === 0) {
-            throw new BadRequestError('Product not found.');
-        }
+        if (filteredProducts.length === 0) { throw new BadRequestError('Product not found.') }
 
         const startIndex = (page - 1) * limit;
         const endIndex = page * limit;
