@@ -1,0 +1,24 @@
+.main-sale-our-products-container {
+    box-sizing: border-box;
+    padding: 0 0 20px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+
+    .text-sale-our-products-container {
+        gap: 5px;
+        width: 100%;
+        display: flex;
+        font-weight: 800;
+        color: #525252;
+        font-size: 1.2rem;
+        align-items: center;
+        box-sizing: border-box;
+
+        .icon-sale-our-percent {
+            color: #330066;
+        }
+    }
+}

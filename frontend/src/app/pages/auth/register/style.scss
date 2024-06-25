@@ -5,32 +5,29 @@
     align-items: center;
     justify-content: center;
     font-family: "Roboto", sans-serif;
-    background-image: linear-gradient(65deg,
-            hsl(218deg 56% 30%) 1%,
-            hsl(218deg 56% 30%) 31%,
-            hsl(218deg 56% 30%) 39%,
-            hsl(218deg 56% 30%) 44%,
-            hsl(218deg 56% 30%) 47%,
-            hsl(218deg 56% 30%) 49%,
-            hsl(218deg 56% 30%) 50%,
-            hsl(218deg 56% 30%) 51%,
-            hsl(218deg 56% 30%) 51%,
-            hsl(218deg 56% 30%) 51%,
-            hsl(218deg 56% 30%) 51%,
-            hsl(218deg 56% 30%) 50%,
-            hsl(218deg 56% 30%) 50%,
-            hsl(257deg 32% 41%) 50%,
-            hsl(299deg 34% 41%) 49%,
-            hsl(327deg 47% 50%) 49%,
-            hsl(344deg 72% 58%) 49%,
-            hsl(3deg 92% 65%) 49%,
-            hsl(22deg 100% 60%) 50%,
-            hsl(22deg 100% 60%) 51%,
-            hsl(22deg 100% 60%) 53%,
-            hsl(22deg 100% 60%) 56%,
-            hsl(22deg 100% 60%) 61%,
-            hsl(22deg 100% 60%) 69%,
-            hsl(22deg 100% 60%) 99%);
+    background-image: linear-gradient(220deg,
+            hsl(270deg 100% 20%) 1%,
+            hsl(284deg 100% 20%) 33%,
+            hsl(296deg 100% 21%) 41%,
+            hsl(307deg 100% 23%) 46%,
+            hsl(315deg 100% 27%) 48%,
+            hsl(321deg 100% 31%) 50%,
+            hsl(326deg 100% 34%) 51%,
+            hsl(330deg 100% 38%) 51%,
+            hsl(334deg 100% 40%) 51%,
+            hsl(339deg 89% 45%) 51%,
+            hsl(348deg 80% 53%) 50%,
+            hsl(356deg 88% 59%) 50%,
+            hsl(4deg 96% 62%) 49%,
+            hsl(12deg 100% 61%) 49%,
+            hsl(19deg 100% 59%) 49%,
+            hsl(26deg 100% 57%) 49%,
+            hsl(32deg 100% 55%) 50%,
+            hsl(39deg 100% 51%) 52%,
+            hsl(43deg 100% 50%) 54%,
+            hsl(47deg 100% 50%) 59%,
+            hsl(51deg 100% 50%) 67%,
+            hsl(55deg 100% 50%) 99%);
 
     .form-register-cointainer {
         gap: 20px;
@@ -66,7 +63,7 @@
 
                 div {
                     font-weight: 700;
-                    color: #ff7e33;
+                    color: #330066;
                     position: relative;
                     width: 110px;
                 }
@@ -136,32 +133,29 @@
                 margin-top: 20px;
                 margin-bottom: 50px;
                 cursor: pointer;
-                background-image: linear-gradient(295deg,
-                        hsl(218deg 56% 30%) 1%,
-                        hsl(218deg 56% 30%) 31%,
-                        hsl(218deg 56% 30%) 39%,
-                        hsl(218deg 56% 30%) 44%,
-                        hsl(218deg 56% 30%) 47%,
-                        hsl(218deg 56% 30%) 49%,
-                        hsl(218deg 56% 30%) 50%,
-                        hsl(218deg 56% 30%) 51%,
-                        hsl(218deg 56% 30%) 51%,
-                        hsl(218deg 56% 30%) 51%,
-                        hsl(218deg 56% 30%) 51%,
-                        hsl(218deg 56% 30%) 50%,
-                        hsl(218deg 56% 30%) 50%,
-                        hsl(257deg 32% 41%) 50%,
-                        hsl(299deg 34% 41%) 49%,
-                        hsl(327deg 47% 50%) 49%,
-                        hsl(344deg 72% 58%) 49%,
-                        hsl(3deg 92% 65%) 49%,
-                        hsl(22deg 100% 60%) 50%,
-                        hsl(22deg 100% 60%) 51%,
-                        hsl(22deg 100% 60%) 53%,
-                        hsl(22deg 100% 60%) 56%,
-                        hsl(22deg 100% 60%) 61%,
-                        hsl(22deg 100% 60%) 69%,
-                        hsl(22deg 100% 60%) 99%);
+                background-image: linear-gradient(220deg,
+                        hsl(270deg 100% 20%) 1%,
+                        hsl(284deg 100% 20%) 33%,
+                        hsl(296deg 100% 21%) 41%,
+                        hsl(307deg 100% 23%) 46%,
+                        hsl(315deg 100% 27%) 48%,
+                        hsl(321deg 100% 31%) 50%,
+                        hsl(326deg 100% 34%) 51%,
+                        hsl(330deg 100% 38%) 51%,
+                        hsl(334deg 100% 40%) 51%,
+                        hsl(339deg 89% 45%) 51%,
+                        hsl(348deg 80% 53%) 50%,
+                        hsl(356deg 88% 59%) 50%,
+                        hsl(4deg 96% 62%) 49%,
+                        hsl(12deg 100% 61%) 49%,
+                        hsl(19deg 100% 59%) 49%,
+                        hsl(26deg 100% 57%) 49%,
+                        hsl(32deg 100% 55%) 50%,
+                        hsl(39deg 100% 51%) 52%,
+                        hsl(43deg 100% 50%) 54%,
+                        hsl(47deg 100% 50%) 59%,
+                        hsl(51deg 100% 50%) 67%,
+                        hsl(55deg 100% 50%) 99%);
             }
 
             .link {

@@ -1,0 +1,11 @@
+.main-home-container {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    background-color: rgba(240, 240, 240, 0.582);
+
+    @media (max-width: 958px) {
+        width: 100%;
+    }
+}

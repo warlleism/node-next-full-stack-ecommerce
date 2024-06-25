@@ -92,7 +92,7 @@ export default function CartSideBar() {
             </TransitionGroup>
 
             <div className='container-finalize-purchase'>
-                <div className='container-cart-total'>Valor Total: R${fullPrice}</div>
+                <div className='container-cart-total'>Valor Total: <div style={{ fontWeight: 700 }}>R${fullPrice}</div></div>
                 <div className='container-cart-finalize'>
                     <AccountBalanceWalletIcon className='icon-purchase' />
                     <div>

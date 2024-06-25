@@ -1,16 +1,10 @@
-import { RenderProducts } from "./products/products"
-import { RenderSaleProducts } from "./sale-products/sale-products"
+import { RenderProducts } from "./components/render-products/products"
+import { RenderSaleProducts } from "./components/render-sale-products/sale-products"
+import './style.scss'
 
 export default function HomePage() {
     return (
-        <div style={{
-            margin: "0 auto",
-            gap: 100,
-            display: "flex",
-            flexDirection: "column",
-            width: '70%',
-            backgroundColor: " #224177"
-        }}>
+        <div className="main-home-container">
             <RenderProducts />
             <RenderSaleProducts />
         </div>

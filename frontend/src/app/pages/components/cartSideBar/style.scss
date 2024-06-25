@@ -17,15 +17,11 @@
     justify-content: space-between;
 
     div:nth-child(1) {
-        color: #3f3f3f;
+       
+        text-align: center;
+        color: #330066;
         font-size: 2rem;
         font-weight: 900;
-        border-bottom: 2px solid #ff7e33;
-    }
-
-    div:nth-child(1)::after {
-        content: ':';
-        color: #ff7e33;
     }
 
     div:nth-child(2) {
@@ -73,7 +69,7 @@
         font-size: 1.3rem;
         width: 150px;
         font-weight: 600;
-        color: #ff7e33;
+        color: #330066;
         text-align: center;
     }
 
@@ -156,14 +152,11 @@
         display: flex;
         z-index: 9999;
         font-size: 1.3rem;
+        gap: 5px;
         align-items: center;
         justify-content: center;
-        background-color: #ff7e33;
-    }
-
-    .container-cart-finalize:hover {
-        background-color: #052255;
-
+        color: rgb(27, 27, 27);
+        background-color: #ffda33;
     }
 
     .container-cart-finalize {
@@ -175,7 +168,7 @@
         align-items: center;
         box-sizing: border-box;
         justify-content: center;
-        background-color: #214177;
+        background-color: #330066;
         transition: .5s ease-in-out;
 
         .icon-purchase {

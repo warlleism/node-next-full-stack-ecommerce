@@ -2,11 +2,16 @@
     gap: 20px;
     width: 100%;
     display: flex;
-    padding: 0 20px;
+    padding: 0 10px;
+    box-sizing: border-box;
     align-items: center;
     box-sizing: border-box;
     flex-direction: column;
     justify-content: center;
+
+    @media (max-width: 918px) {
+        padding: 0;
+    }
 
     .container-caroussel {
         gap: 10px;
