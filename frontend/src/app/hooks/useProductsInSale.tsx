@@ -10,6 +10,7 @@ const useProductsInSale = () => {
     const fetchProducts = useMemo(() => async () => {
         const response = await fetch(`http://localhost:3001/sale/all?page=${pages}&limit=${qtdItens}`);
         const data = await response.json();
+        console.log(data?.data)
 
         return data?.data || [];
     }, [pages, qtdItens]);

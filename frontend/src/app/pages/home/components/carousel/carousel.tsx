@@ -51,6 +51,7 @@ export function CarouselComponent({ products, scroll }: any) {
                             <SwiperSlide
                                 key={item.id}
                                 className="product-card">
+                                {item.sale && <div className='container-sale-number'>{item?.sale}%</div>}
                                 <div
                                     className="card-image-container">
                                     <FavoriteComponent id={item.id} />

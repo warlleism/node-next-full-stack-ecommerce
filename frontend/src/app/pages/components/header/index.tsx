@@ -42,6 +42,13 @@ export function Header() {
         route.push('/pages/detail/detailAll')
     };
 
+    const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        const syntheticEvent = {
+            preventDefault: () => { },
+        } as React.FormEvent<HTMLFormElement>;
+        handleFormSubmit(syntheticEvent);
+    };
+
     return (
         <div className='main-container-header'>
             <Link href={'/'} className='container-image'>
@@ -67,9 +74,7 @@ export function Header() {
                 </form>
                 {
                     products.length !== 0 ?
-                        <div
-                            className='container-search-list'
-                            ref={inputRefContainer}>
+                        <div className='container-search-list' ref={inputRefContainer}>
                             {products?.map((item: any, index) => (
                                 <Link
                                     style={{ borderTop: index !== 0 ? '1px rgba(0, 0, 0, 0.075) solid' : 'none' }}
@@ -91,10 +96,14 @@ export function Header() {
                                     </div>
                                 </Link>
                             ))}
+                            <div
+                                onClick={handleClick}
+                                style={{ fontWeight: 700, color: '#000', cursor: 'pointer' }}>
+                                Ver Todos...
+                            </div>
                         </div>
                         :
                         error.length !== 0 && <div className='container-search-list'>{error.length !== 0 ? error : null}</div>
-
                 }
             </div>
             {

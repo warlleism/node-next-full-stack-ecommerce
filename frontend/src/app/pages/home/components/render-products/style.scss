@@ -1,11 +1,11 @@
 .main-our-products-container {
-    box-sizing: border-box;
-    padding: 0 0 20px 0;
+    gap: 20px;
     width: 100%;
     display: flex;
+    padding: 0 0 20px 0;
     flex-direction: column;
+    box-sizing: border-box;
     justify-content: center;
-    gap: 20px;
 
     .text-our-products-container {
         color: #fff;

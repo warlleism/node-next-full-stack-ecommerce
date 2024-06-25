@@ -38,7 +38,12 @@ export class SaleController {
                         return res.status(404).json({ message: "No products found." });
                     }
 
-                    const filteredProducts = await Promise.all(products.map(async product => {
+                    const itensWithSale = products.map((data) => {
+                        const saleInfo = sales.find((item) => item.product_id == data.id);
+                        return saleInfo ? { ...data, sale: saleInfo.sale } : data;
+                    });
+
+                    const filteredProducts = await Promise.all(itensWithSale.map(async product => {
                         const imagePath = product.image;
                         const data = await fs.promises.readFile(imagePath, 'base64');
                         return { ...product, image: data };
@@ -61,6 +66,7 @@ export class SaleController {
             const sales = await saleRepository.find();
             const ids = sales.map((sale) => sale.product_id);
 
+            console.log(ids)
             const [products, total] = await productRepository.findAndCount({
                 where: { id: In(ids) },
                 skip: (page - 1) * limit,
@@ -71,7 +77,13 @@ export class SaleController {
                 return res.status(404).json({ message: "No products found." });
             }
 
-            const filteredProducts = await Promise.all(products.map(async product => {
+            const itensWithSale = products.map((data) => {
+                console.log(data.id)
+                const saleInfo = sales.find((item) => item.product_id == data.id);
+                return saleInfo ? { ...data, sale: saleInfo.sale } : data;
+            });
+
+            const filteredProducts = await Promise.all(itensWithSale.map(async product => {
                 const imagePath = product.image;
                 const data = await fs.promises.readFile(imagePath, 'base64');
                 return { ...product, image: data };
