@@ -5,10 +5,10 @@ import { useMemo, useState } from 'react';
 const useProductsInSale = () => {
 
     const [pages, setPages] = useState(1);
-    const [qtdItens, setQtdItens] = useState(17);
+    const [qtdItens, setQtdItens] = useState(30);
 
     const fetchProducts = useMemo(() => async () => {
-        const response = await fetch(`http://localhost:3001/sale/all`);
+        const response = await fetch(`http://localhost:3001/sale/all?page=${pages}&limit=${qtdItens}`);
         const data = await response.json();
 
         return data?.data || [];

@@ -8,18 +8,18 @@ import useUserStore from '@/app/stores/userStorage';
 import PersonIcon from '@mui/icons-material/Person';
 import useProductSearch from '@/app/hooks/useProductSearch';
 import useProductStore from '@/app/stores/productStorage';
-import useProductAllSearch from '@/app/hooks/useProductAllSearch';
 import ButtonLogout from '../logoutButton/logout';
 import ecommerceIcon from '../../../assets/ecommece-logo.png'
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import useCartStore from '@/app/stores/cartStorage';
+import { useRouter } from 'next/navigation';
 
 export function Header() {
 
+    const route = useRouter()
     const [animate, setAnimate] = useState(false);
     const { detailProduct } = useProductStore();
     const { user, initializeUser } = useUserStore();
-    const { handleInputClick } = useProductAllSearch()
     const { cart, initializeCart, showCart } = useCartStore();
     const { error, products, inputRef, handleInputChange, inputRefContainer } = useProductSearch()
 
@@ -38,7 +38,8 @@ export function Header() {
 
     const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        handleInputClick(String(inputRef?.current?.value))
+        handleInputChange(1, 30)
+        route.push('/pages/detail/detailAll')
     };
 
     return (
@@ -61,7 +62,7 @@ export function Header() {
                         ref={inputRef}
                         type='text'
                         placeholder='Busque aqui...'
-                        onChange={() => handleInputChange()}
+                        onChange={() => handleInputChange(1, 4)}
                     />
                 </form>
                 {
@@ -72,7 +73,7 @@ export function Header() {
                             {products?.map((item: any, index) => (
                                 <Link
                                     style={{ borderTop: index !== 0 ? '1px rgba(0, 0, 0, 0.075) solid' : 'none' }}
-                                    href={'/pages/detailOne'}
+                                    href={'/pages/detail/detailOne'}
                                     key={item?.id}
                                     className='container-search-card'
                                     onClick={() => detailProduct(item)}>

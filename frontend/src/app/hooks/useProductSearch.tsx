@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import useProductStore from '../stores/productStorage';
 
 const useProductSearch = () => {
 
@@ -7,6 +8,8 @@ const useProductSearch = () => {
     let typingTimer: ReturnType<typeof setTimeout> | null = null;
     const inputRef = useRef<HTMLInputElement>(null);
     const inputRefContainer = useRef<HTMLInputElement>(null);
+    const { detailProduct, detailAllProduct } = useProductStore();
+
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -23,7 +26,7 @@ const useProductSearch = () => {
             else {
                 if (inputRefContainer.current) {
                     const container = inputRefContainer.current;
-                    container.style.display = 'block';
+                    container.style.display = 'flex';
                     container.style.opacity = '1';
                     setError('')
                 }
@@ -37,13 +40,10 @@ const useProductSearch = () => {
         };
     }, []);
 
-    const handleInputChange = async () => {
+    const handleInputChange = async (page: number, limit: number) => {
         if (typingTimer) {
             clearTimeout(typingTimer);
         }
-
-        const page = 1
-        const limit = 4
 
         typingTimer = setTimeout(async () => {
             if (inputRef.current) {
@@ -74,7 +74,12 @@ const useProductSearch = () => {
                     }
 
                     const data = await response.json();
-                    setProducts(data.data);
+
+                    if (limit >= 30) {
+                        detailAllProduct(data.data)
+                    } else {
+                        setProducts(data.data);
+                    }
 
                 } catch (error) {
                     console.error('Erro ao buscar produtos:', error);
@@ -83,7 +88,13 @@ const useProductSearch = () => {
         }, 1000);
     };
 
-    return { products, inputRef, handleInputChange, error, inputRefContainer };
+    return {
+        products,
+        inputRef,
+        handleInputChange,
+        error,
+        inputRefContainer
+    };
 };
 
 export default useProductSearch;

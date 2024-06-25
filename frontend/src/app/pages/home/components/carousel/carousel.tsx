@@ -19,11 +19,17 @@ import FavoriteComponent from '../favoriteToggler/toggler';
 export function CarouselComponent({ products, scroll }: any) {
 
     const route = useRouter()
-    const { detailProduct } = useProductStore();
+    const { detailProduct, detailAllProduct } = useProductStore();
 
     return (
         <>
             <div className="container-cards">
+                <div
+                    onClick={() => {
+                        detailAllProduct(products)
+                        route.push('/pages/detail/detailAll')
+                    }}
+                    className='container-carousel-see-all'>Ver Todos</div>
                 <div className='container-caroussel'>
                     <ArrowCircleLeftIcon
                         id={`${scroll}swiper-button-next-custom`}
