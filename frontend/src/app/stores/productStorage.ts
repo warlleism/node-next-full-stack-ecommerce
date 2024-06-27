@@ -8,7 +8,7 @@ interface ProductState {
   allProducts: ProductData[];
   favorite: number[];
   detailProduct: (product: ProductData) => void;
-  detailAllProduct: (product: ProductData) => void;
+  detailAllProduct: (product: ProductData[]) => void;
   addToFavorite: (numberToAdd: string) => void;
   removeFromFavorite: (numberToRemove: string) => void;
   initializeOneProduct: () => void;
@@ -21,17 +21,17 @@ const useProductStore = create<ProductState>((set) => ({
   allProducts: [],
   initializeOneProduct: () => {
     if (typeof window !== 'undefined') {
-      const storedUser = localStorage.getItem('product');
-      if (storedUser) {
-        set({ product: JSON.parse(storedUser) });
+      const storedProduct = localStorage.getItem('product');
+      if (storedProduct) {
+        set({ product: JSON.parse(storedProduct) });
       }
     }
   },
   initializeAllProduct: () => {
     if (typeof window !== 'undefined') {
-      const storedUser = localStorage.getItem('allProduct');
-      if (storedUser) {
-        set({ allProducts: JSON.parse(storedUser) });
+      const storedProduct = localStorage.getItem('allProduct');
+      if (storedProduct) {
+        set({ allProducts: JSON.parse(storedProduct) });
       }
     }
   },
@@ -40,7 +40,7 @@ const useProductStore = create<ProductState>((set) => ({
       localStorage.setItem('allProduct', JSON.stringify(product));
     }
     set(() => ({
-      allProducts: [product]
+      allProducts: product
     }));
   },
   detailProduct: (product) => {

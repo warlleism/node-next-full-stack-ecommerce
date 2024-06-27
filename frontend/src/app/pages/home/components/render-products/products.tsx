@@ -1,6 +1,6 @@
 'use client';
 
-import useProductsWithFavorites from '@/app/hooks/useProductsWithFavorites';
+import useProductsWithFavorites from '@/app/hooks/useProducts';
 import { CarouselComponent } from '../carousel/carousel';
 import 'swiper/swiper-bundle.css';
 import './style.scss';

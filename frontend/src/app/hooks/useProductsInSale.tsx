@@ -10,9 +10,14 @@ const useProductsInSale = () => {
     const fetchProducts = useMemo(() => async () => {
         const response = await fetch(`http://localhost:3001/sale/all?page=${pages}&limit=${qtdItens}`);
         const data = await response.json();
-        console.log(data?.data)
 
-        return data?.data || [];
+        const priceSale = data?.data.map((item: ProductData) => {
+            let valorDesconto = (Number(item.price) * Number(item.sale)) / 100;
+            let precoFinal = Number(item.price) - valorDesconto;
+            return { ...item, price: precoFinal, defaultPrice: item.price }
+        })
+
+        return priceSale || [];
     }, [pages, qtdItens]);
 
     const { data: products = [], isLoading, isError, error, refetch } = useQuery<ProductData[]>(

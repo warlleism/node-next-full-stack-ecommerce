@@ -15,5 +15,6 @@ export interface ProductData {
     rate: number | string;
     qtd?: number;
     sale?: number | string;
+    defaultPrice?: number | string;
     cartPrice?: number | string;
 }

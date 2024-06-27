@@ -55,7 +55,8 @@ export default function CartSideBar() {
                         <div className='container-itens-cart' key={item.id}>
                             <Image
                                 className="image-cart"
-                                objectFit="cover"
+                                style={{ objectFit: "contain" }}
+                                loading="eager"
                                 alt={item.name}
                                 src={`data:image/jpeg;base64,${item.image}`}
                                 width={500}

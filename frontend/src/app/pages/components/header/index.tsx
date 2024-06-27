@@ -12,11 +12,9 @@ import ButtonLogout from '../logoutButton/logout';
 import ecommerceIcon from '../../../assets/ecommece-logo.png'
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import useCartStore from '@/app/stores/cartStorage';
-import { useRouter } from 'next/navigation';
 
 export function Header() {
 
-    const route = useRouter()
     const [animate, setAnimate] = useState(false);
     const { detailProduct } = useProductStore();
     const { user, initializeUser } = useUserStore();
@@ -39,13 +37,10 @@ export function Header() {
     const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         handleInputChange(1, 30)
-        route.push('/pages/detail/detailAll')
     };
 
-    const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        const syntheticEvent = {
-            preventDefault: () => { },
-        } as React.FormEvent<HTMLFormElement>;
+    const handleClick = () => {
+        const syntheticEvent = { preventDefault: () => { } } as React.FormEvent<HTMLFormElement>;
         handleFormSubmit(syntheticEvent);
     };
 
@@ -55,10 +50,11 @@ export function Header() {
                 <Image
                     className='image'
                     src={ecommerceIcon}
-                    objectFit='contain'
                     alt='logo'
                     width={50}
-                    height={50} />
+                    height={50}
+                    priority
+                />
             </Link>
             <div className='search-container'>
                 <form
@@ -84,11 +80,12 @@ export function Header() {
                                     onClick={() => detailProduct(item)}>
                                     <Image
                                         className="image"
-                                        objectFit="cover"
+                                        style={{ objectFit: "contain" }}
                                         alt={item.name}
-                                        src={`data:image/jpeg;base64,${item.image}`}
+                                        src={`data:image/png;base64,${item.image}`}
                                         width={40}
                                         height={40}
+                                        loading="eager"
                                     />
                                     <div className='container-text-search'>
                                         <div>{item?.name}</div>
@@ -98,7 +95,7 @@ export function Header() {
                             ))}
                             <div
                                 onClick={handleClick}
-                                style={{ fontWeight: 700, color: '#000', cursor: 'pointer' }}>
+                                style={{ fontWeight: 700, color: '#000000b0', cursor: 'pointer' }}>
                                 Ver Todos...
                             </div>
                         </div>

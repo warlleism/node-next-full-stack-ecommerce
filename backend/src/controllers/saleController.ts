@@ -66,7 +66,6 @@ export class SaleController {
             const sales = await saleRepository.find();
             const ids = sales.map((sale) => sale.product_id);
 
-            console.log(ids)
             const [products, total] = await productRepository.findAndCount({
                 where: { id: In(ids) },
                 skip: (page - 1) * limit,
@@ -78,7 +77,6 @@ export class SaleController {
             }
 
             const itensWithSale = products.map((data) => {
-                console.log(data.id)
                 const saleInfo = sales.find((item) => item.product_id == data.id);
                 return saleInfo ? { ...data, sale: saleInfo.sale } : data;
             });

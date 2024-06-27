@@ -1,25 +1,25 @@
 import { useEffect, useRef, useState } from 'react';
 import useProductStore from '../stores/productStorage';
+import { useRouter } from 'next/navigation';
 
 const useProductSearch = () => {
 
+    const route = useRouter()
     const [products, setProducts] = useState([]);
     const [error, setError] = useState('')
     let typingTimer: ReturnType<typeof setTimeout> | null = null;
     const inputRef = useRef<HTMLInputElement>(null);
     const inputRefContainer = useRef<HTMLInputElement>(null);
-    const { detailProduct, detailAllProduct } = useProductStore();
-
+    const { detailAllProduct } = useProductStore();
 
     useEffect(() => {
+
         const handleClickOutside = (event: MouseEvent) => {
             if (inputRef.current && !inputRef.current.contains(event.target as Node)) {
                 const container = inputRefContainer.current;
                 if (container) {
                     container.style.opacity = '0';
-                    setTimeout(() => {
-                        container.style.display = 'none';
-                    }, 300);
+                    setTimeout(() => { container.style.display = 'none' }, 300);
                     setError('');
                 }
             }
@@ -46,6 +46,7 @@ const useProductSearch = () => {
         }
 
         typingTimer = setTimeout(async () => {
+
             if (inputRef.current) {
                 const inputValue = inputRef.current.value;
                 const url = `http://localhost:3001/product/search?page=${page}&limit=${limit}`;
@@ -77,6 +78,12 @@ const useProductSearch = () => {
 
                     if (limit >= 30) {
                         detailAllProduct(data.data)
+                        route.push('/pages/detail/detailAll')
+                        const container = inputRefContainer.current;
+                        if (container) {
+                            container.style.opacity = '0';
+                            setTimeout(() => { container.style.display = 'none' }, 300);
+                        }
                     } else {
                         setProducts(data.data);
                     }
@@ -85,7 +92,7 @@ const useProductSearch = () => {
                     console.error('Erro ao buscar produtos:', error);
                 }
             }
-        }, 1000);
+        }, 800);
     };
 
     return {

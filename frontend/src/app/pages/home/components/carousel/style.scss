@@ -139,17 +139,21 @@
                 }
 
                 .card-price-container {
-                    div:nth-child(1) {
-                        font-size: 1.4rem;
+
+                    .card-price-container-number {
+                        font-size: 1.1rem;
                         font-weight: 700;
                         color: rgb(97, 97, 97);
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
 
                         @media (max-width: 1407px) {
                             font-size: 1rem;
                         }
                     }
 
-                    div:nth-child(2) {
+                    .card-pix-container-number {
                         font-size: .8rem;
                         font-weight: 300;
                         color: rgb(97, 97, 97);
