@@ -6,21 +6,17 @@ import { ProductData } from '../types/product';
 interface ProductState {
   listProducts: ProductData[]
   product: ProductData | null;
-  allProducts: ProductData[];
   favorite: number[];
   detailProduct: (product: ProductData) => void;
-  detailAllProduct: (product: ProductData[]) => void;
   addToFavorite: (numberToAdd: string) => void;
   removeFromFavorite: (numberToRemove: string) => void;
   initializeOneProduct: () => void;
-  initializeAllProduct: () => void;
   listAllProducts: (items: ProductData[]) => void
   updateAllProducts: (items: ProductData) => void
 }
 
 const useProductStore = create<ProductState>((set) => ({
   listProducts: [],
-  allProducts: [],
   favorite: [],
   product: null,
   listAllProducts: (items: ProductData[]) => {
@@ -42,22 +38,6 @@ const useProductStore = create<ProductState>((set) => ({
         set({ product: JSON.parse(storedProduct) });
       }
     }
-  },
-  initializeAllProduct: () => {
-    if (typeof window !== 'undefined') {
-      const storedProduct = localStorage.getItem('allProduct');
-      if (storedProduct) {
-        set({ allProducts: JSON.parse(storedProduct) });
-      }
-    }
-  },
-  detailAllProduct: (product) => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('allProduct', JSON.stringify(product));
-    }
-    set(() => ({
-      allProducts: product
-    }));
   },
   detailProduct: (product) => {
     if (typeof window !== 'undefined') {

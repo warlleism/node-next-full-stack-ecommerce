@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useController } from 'react-hook-form';
+import React, { useState, useEffect } from 'react';
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 
 interface CustomFileFieldProps {
@@ -65,7 +65,19 @@ export default function ControllerFileField({ initialImageSrc, errors, name, con
                 />
                 {errors && <p style={{ color: "#0e0e0e85", fontSize: '.8rem' }}>{errors.message}</p>}
             </div>
-            <div style={{ width: "100%", display: 'flex', alignItems: 'center', gap: 5 }}> <PhotoLibraryIcon style={{ fontSize: "1.2rem" }} />{fileName ? fileName : `${nameFile}.png`}</div>
+            <div style={{ width: "100%", display: 'flex', alignItems: 'center', gap: 5 }}>
+                {fileName ?
+                    <>
+                        <PhotoLibraryIcon style={{ fontSize: "1.2rem" }} />{fileName}
+                    </> :
+                    <>
+                        {
+                            nameFile !== undefined && <><PhotoLibraryIcon style={{ fontSize: "1.2rem" }} />{`${nameFile}.png`}</>
+                        }
+                    </>
+                }
+            </div>
+
         </>
     );
 }

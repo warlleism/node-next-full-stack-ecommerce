@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import useProductStore from '@/app/stores/productStorage';
 
 const useProductSearch = () => {
 
@@ -10,7 +9,6 @@ const useProductSearch = () => {
     let typingTimer: ReturnType<typeof setTimeout> | null = null;
     const inputRef = useRef<HTMLInputElement>(null);
     const inputRefContainer = useRef<HTMLInputElement>(null);
-    const { detailAllProduct } = useProductStore();
 
     useEffect(() => {
 
@@ -77,7 +75,7 @@ const useProductSearch = () => {
                     const data = await response.json();
 
                     if (limit >= 30) {
-                        detailAllProduct(data.data)
+                        // detailAllProduct(data.data)
                         route.push('/pages/detail/detailAll')
                         const container = inputRefContainer.current;
                         if (container) {

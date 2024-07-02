@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 import useProductStore from '../../../stores/productStorage';
 import { getValidToken } from '../../../utils/validToken';
 
-const useProductsWithFavorites = () => {
+const useGetCarouselOurProducts = () => {
 
     const { addToFavorite } = useProductStore();
     const [pages, setPages] = useState(1);
@@ -29,7 +29,7 @@ const useProductsWithFavorites = () => {
     }, [pages, qtdItens, addToFavorite]);
 
     const { data: products = [], isLoading, isError, error, refetch } = useQuery<ProductData[]>(
-        'products',
+        'carousel_products',
         fetchProducts,
         { staleTime: 10000 }
     );
@@ -45,4 +45,4 @@ const useProductsWithFavorites = () => {
     };
 };
 
-export default useProductsWithFavorites;
+export default useGetCarouselOurProducts;

@@ -1,0 +1,45 @@
+import { useQuery } from 'react-query';
+import { ProductData } from '../../../types/product';
+import { useMemo, useState } from 'react';
+import useProductStore from '../../../stores/productStorage';
+import { getValidToken } from '../../../utils/validToken';
+
+const useGetDetailAllProducts = () => {
+
+    const [pages, setPages] = useState(1);
+    const { addToFavorite } = useProductStore();
+    const [qtdItens, setQtdItens] = useState(30);
+
+    const fetchProducts = useMemo(() => async () => {
+        const token = getValidToken();
+        const headers: HeadersInit = token ? { 'Authorization': `Bearer ${token}` } : {};
+        const response = await fetch(`http://localhost:3001/product/all?page=${pages}&limit=${qtdItens}`, { headers });
+        const data = await response.json();
+
+        if (data?.favorites) {
+            data.favorites.forEach((favoriteId: string) => {
+                addToFavorite(favoriteId);
+            });
+        }
+
+        return data?.data || [];
+    }, [pages, qtdItens, addToFavorite]);
+
+    const { data: products = [], isLoading, isError, error, refetch } = useQuery<ProductData[]>(
+        'get_all_products',
+        fetchProducts,
+        { staleTime: 10000 }
+    );
+
+    return {
+        products,
+        isLoading,
+        isError,
+        error,
+        refetch,
+        setPages,
+        setQtdItens
+    };
+};
+
+export default useGetDetailAllProducts;

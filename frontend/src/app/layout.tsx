@@ -1,16 +1,16 @@
 'use client'
 
-import { Inter } from "next/font/google";
 import "./styles/globals.css";
-import { ToastContainer } from 'react-toastify';
+import { useEffect } from "react";
+import { Inter } from "next/font/google";
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import useUserStore from "./stores/userStorage";
+import useCartStore from "./stores/cartStorage";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "./utils/react-query";
 import CartSideBar from "./components/cartSideBar";
-import FormDrawerComponent from "./components/formDrawerComponent/createProduct";
-import useUserStore from "./stores/userStorage";
-import { useEffect } from "react";
-import useCartStore from "./stores/cartStorage";
+import FormDrawerComponent from "./components/formDrawer/createProduct";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const { initializeUser } = useUserStore();
+  const { user, initializeUser } = useUserStore();
   const { initializeCart } = useCartStore();
 
   useEffect(() => {

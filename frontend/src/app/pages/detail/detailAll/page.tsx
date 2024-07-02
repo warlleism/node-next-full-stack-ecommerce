@@ -1,20 +1,17 @@
 'use client'
 
-import { useEffect } from 'react';
-import useProductStore from "@/app/stores/productStorage";
 import './style.scss';
 import Image from "next/image";
 import StarIcon from '@mui/icons-material/Star';
 import { ProductData } from '@/app/types/product';
 import { Header } from '../../../components/header';
+import useGetDetailAllProducts from '../hooks/useGetDetailAllProducts';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 export default function DetailAllProduct() {
-    
-    const { allProducts, initializeAllProduct } = useProductStore();
 
-    useEffect(() => {
-        initializeAllProduct();
-    }, []);
+    const { products, isLoading } = useGetDetailAllProducts();
 
     const renderStars = (rate: number | string) => {
         const stars = Array(3).fill(null).map((_, index) => (
@@ -26,8 +23,8 @@ export default function DetailAllProduct() {
     return (
         <>
             <Header />
-            {allProducts && allProducts.length > 0 ? (
-                allProducts.map((item: ProductData, index: number) => (
+            {!isLoading ? (
+                products.map((item: ProductData, index: number) => (
                     <div key={index} className="main-container-detailAll">
                         <div className="container-detailAll-name">{item?.name}</div>
                         <div className="container-detailAll-info">
@@ -53,7 +50,15 @@ export default function DetailAllProduct() {
                     </div>
                 ))
             ) : (
-                <div>Carregando produtos...</div>
+                <div className='container-detailAll-loading'>
+
+                    <CircularProgress
+                        variant="indeterminate"
+                        disableShrink
+                        sx={{ color: '#32004e', animationDuration: '550ms' }}
+                        size={120}
+                    />
+                </div>
             )}
         </>
     );

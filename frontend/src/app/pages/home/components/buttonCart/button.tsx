@@ -14,12 +14,8 @@ export function Button({ data }: { data: ProductData }) {
     const route = useRouter();
     const { user } = useUserStore()
     const { id, price, } = data;
-    const { cart, addProductToCart, initializeCart, showCart } = useCartStore();
+    const { cart, addProductToCart, showCart } = useCartStore();
     const isInCart = cart.some(item => item.id === id && item.userId === user?.id);
-
-    useEffect(() => {
-        initializeCart()
-    }, [])
 
     const handleClick = () => {
         isInCart ? showCart() : user ?

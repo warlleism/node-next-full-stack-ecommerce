@@ -1,13 +1,13 @@
 'use client';
 
-import useProductsWithFavorites from '../../hooks/useGetProducts';
+import useGetCarouselOurProducts from '../../hooks/useGetCarouselOurProducts';
 import { CarouselComponent } from '../carousel/carousel';
 import 'swiper/swiper-bundle.css';
 import './style.scss';
 
 export function RenderProducts() {
 
-    const { listProducts } = useProductsWithFavorites();
+    const { listProducts } = useGetCarouselOurProducts();
 
     return (
         <div className='main-our-products-container'>

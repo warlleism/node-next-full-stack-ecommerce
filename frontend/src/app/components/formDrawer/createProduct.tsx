@@ -15,12 +15,12 @@ import ControllerFileField from "../inputFileController/inputFile.Controller";
 
 const schema = z.object({
     id: z.number().optional().nullable(),
+    rate: z.string().min(0).max(5).nullable().optional(),
     name: z.string().min(1, 'O nome é obrigatório e não pode estar vazio.'),
     price: z.string().min(1, 'O preço é obrigatório e não pode estar vazio.'),
+    image: z.string().min(1, 'A imagem é obrigatória e não pode estar vazia.'),
     category: z.string().min(1, 'A categoria é obrigatória e não pode estar vazia.'),
-    rate: z.string().min(0).max(5).nullable().optional(),
     description: z.string().min(1, 'A descrição é obrigatória e não pode estar vazia.'),
-    image: z.string().min(1, 'A imagem é obrigatória e não pode estar vazia.')
 });
 
 type Inputs = z.infer<typeof schema>;
@@ -30,43 +30,19 @@ export default function FormDrawerComponent() {
     const { updateAllProducts } = useProductStore()
     const { newProduct, showCrudContainer, hiddenCrudContainer } = useNewProductStore();
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        setValue,
-        control,
-        reset
-    } = useForm<Inputs>({
-        resolver: zodResolver(schema),
-        defaultValues: newProduct ?? {
-            id: null,
-            name: "",
-            price: "",
-            category: "",
-            rate: "0",
-            description: "",
-            image: ""
-        },
-    });
+    const { register, handleSubmit, formState: { errors }, setValue, control, reset } =
+        useForm<Inputs>({
+            resolver: zodResolver(schema),
+            defaultValues: newProduct ?? { id: null, name: "", price: "", category: "", rate: "0", description: "", image: "" },
+        });
 
     function hiddenAndClearForm() {
-        reset({
-            id: null,
-            name: "",
-            price: "",
-            category: "",
-            rate: "0",
-            description: "",
-            image: ""
-        });
+        reset({ id: null, name: "", price: "", category: "", rate: "0", description: "", image: "" });
         hiddenCrudContainer()
     }
 
     useEffect(() => {
-        if (newProduct) {
-            Object.keys(newProduct).forEach(key => { setValue(key as keyof Inputs, newProduct[key as keyof Inputs]) })
-        }
+        if (newProduct) Object.keys(newProduct).forEach(key => { setValue(key as keyof Inputs, newProduct[key as keyof Inputs]) })
     }, [newProduct]);
 
     async function onSubmit(values: any) {
@@ -78,10 +54,7 @@ export default function FormDrawerComponent() {
         try {
             const response = await fetch(`http://localhost:3001/${url}`, {
                 method: method,
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                 body: JSON.stringify(values),
             })
 

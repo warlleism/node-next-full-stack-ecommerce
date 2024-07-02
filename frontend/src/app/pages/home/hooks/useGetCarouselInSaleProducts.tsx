@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import { ProductData } from '../../../types/product';
 import { useMemo, useState } from 'react';
 
-const useProductsInSale = () => {
+const useGetCarouselInSaleProducts = () => {
 
     const [pages, setPages] = useState(1);
     const [qtdItens, setQtdItens] = useState(30);
@@ -37,4 +37,4 @@ const useProductsInSale = () => {
     };
 };
 
-export default useProductsInSale;
+export default useGetCarouselInSaleProducts;

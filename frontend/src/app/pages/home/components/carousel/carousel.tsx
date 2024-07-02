@@ -12,7 +12,7 @@ import { ProductData } from '@/app/types/product';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import StarHalfIcon from '@mui/icons-material/StarHalf';
 import useProductStore from '@/app/stores/productStorage';
-import FavoriteComponent from '../favoriteToggler/toggler';
+import FavoriteComponent from '../../../../components/favoriteToggler/toggler';
 import SkeletonComponent from '../skeleton/skeleton';
 import ButtonEditProduct from '@/app/components/buttonEdit/edit';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
@@ -21,20 +21,17 @@ import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 export function CarouselComponent({ products, scroll }: any) {
 
     const route = useRouter()
-    const { detailProduct, detailAllProduct } = useProductStore();
+    const { detailProduct } = useProductStore();
 
     return (
         <div className="container-cards">
             <div className='container-carousel-see-all'>
                 <div
-                    onClick={() => {
-                        detailAllProduct(products)
-                        route.push('/pages/detail/detailAll')
-                    }}
+                    onClick={() => { route.push('/pages/detail/detailAll') }}
                     style={{ cursor: 'pointer', width: 80, textAlign: 'center' }}>Ver Todos</div>
             </div>
             <div className='container-caroussel'>
-                <ArrowCircleLeftIcon id={`${scroll}swiper-button-next-custom`} className="swiper-button" />
+                {products.length !== 0 && <ArrowCircleLeftIcon id={`${scroll}swiper-button-next-custom`} className="swiper-button" />}
                 <Swiper
                     className='carousel'
                     spaceBetween={10}
@@ -106,16 +103,12 @@ export function CarouselComponent({ products, scroll }: any) {
                                 </SwiperSlide>
                             ))
                             :
-                            <SwiperSlide style={{ width: "100vw" }}>
-                                <div style={{ display: 'flex', gap: 10, position: 'relative' }}>
-                                    {
-                                        [1, 2, 3, 4, 5, 6, 7, 8].map((_, index) => <SkeletonComponent key={index} />)
-                                    }
-                                </div>
-                            </SwiperSlide>
+                            <div style={{ display: 'flex', gap: 10, position: 'relative' }}>
+                                {[1, 2, 3, 4, 5, 6, 7, 8].map((_, index) => <SkeletonComponent key={index} />)}
+                            </div>
                     }
                 </Swiper>
-                <ArrowCircleRightIcon id={`${scroll}swiper-button-prev-custom`} className="swiper-button" />
+                {products.length !== 0 && <ArrowCircleRightIcon id={`${scroll}swiper-button-prev-custom`} className="swiper-button" />}
             </div>
         </div>
     );

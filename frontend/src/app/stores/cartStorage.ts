@@ -27,8 +27,9 @@ const useCartStore = create<ProductState>((set) => ({
     }));
   },
   initializeCart: () => {
+    const user = localStorage.getItem('user');
     const storedCart = localStorage.getItem('cart');
-    if (storedCart) {
+    if (storedCart && user) {
       set({ cart: JSON.parse(storedCart) });
     }
   },
@@ -57,7 +58,7 @@ const useCartStore = create<ProductState>((set) => ({
       try {
         if (typeof window !== 'undefined') {
           const cartString = JSON.stringify(updatedCart);
-           localStorage.setItem('cart', cartString);
+          localStorage.setItem('cart', cartString);
         }
       } catch (error) {
         console.error('Error storing updated cart:', error);
