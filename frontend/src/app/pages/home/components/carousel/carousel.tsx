@@ -31,7 +31,9 @@ export function CarouselComponent({ products, scroll }: any) {
                     style={{ cursor: 'pointer', width: 80, textAlign: 'center' }}>Ver Todos</div>
             </div>
             <div className='container-caroussel'>
-                {products.length !== 0 && <ArrowCircleLeftIcon id={`${scroll}swiper-button-next-custom`} className="swiper-button" />}
+                <ArrowCircleLeftIcon
+                    style={{ display: products.length !== 0 ? 'block' : 'none' }}
+                    id={`${scroll}swiper-button-next-custom`} className="swiper-button" />
                 <Swiper
                     className='carousel'
                     spaceBetween={10}
@@ -104,11 +106,13 @@ export function CarouselComponent({ products, scroll }: any) {
                             ))
                             :
                             <div style={{ display: 'flex', gap: 10, position: 'relative' }}>
-                                {[1, 2, 3, 4, 5, 6, 7, 8].map((_, index) => <SkeletonComponent key={index} />)}
+                                <SkeletonComponent />
                             </div>
                     }
                 </Swiper>
-                {products.length !== 0 && <ArrowCircleRightIcon id={`${scroll}swiper-button-prev-custom`} className="swiper-button" />}
+                <ArrowCircleRightIcon
+                    style={{ display: products.length !== 0 ? 'block' : 'none' }}
+                    id={`${scroll}swiper-button-prev-custom`} className="swiper-button" />
             </div>
         </div>
     );

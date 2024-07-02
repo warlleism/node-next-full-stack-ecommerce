@@ -1,9 +1,9 @@
 'use client';
 
-import useGetCarouselOurProducts from '../../hooks/useGetCarouselOurProducts';
-import { CarouselComponent } from '../carousel/carousel';
-import 'swiper/swiper-bundle.css';
 import './style.scss';
+import 'swiper/swiper-bundle.css';
+import { CarouselComponent } from '../carousel/carousel';
+import useGetCarouselOurProducts from '../../hooks/useGetCarouselOurProducts';
 
 export function RenderProducts() {
 
