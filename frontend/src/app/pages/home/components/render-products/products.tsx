@@ -1,18 +1,18 @@
 'use client';
 
-import useProductsWithFavorites from '@/app/hooks/useProducts';
+import useProductsWithFavorites from '../../hooks/useGetProducts';
 import { CarouselComponent } from '../carousel/carousel';
 import 'swiper/swiper-bundle.css';
 import './style.scss';
 
 export function RenderProducts() {
 
-    const { products } = useProductsWithFavorites();
+    const { listProducts } = useProductsWithFavorites();
 
     return (
         <div className='main-our-products-container'>
             <div className='text-our-products-container'>NOSSOS PRODUTOS</div>
-            <CarouselComponent products={products} scroll={'our-products'} />
+            <CarouselComponent products={listProducts} scroll={'our-products'} />
         </div>
     );
 }

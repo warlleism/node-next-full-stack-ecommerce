@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect } from 'react';
 import StarIcon from '@mui/icons-material/Star';
 import useProductStore from "@/app/stores/productStorage";
-import { Header } from '../../components/header';
+import { Header } from '../../../components/header';
 
 export default function DetailOneProduct() {
 

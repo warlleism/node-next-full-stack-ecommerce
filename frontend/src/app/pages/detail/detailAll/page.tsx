@@ -6,9 +6,10 @@ import './style.scss';
 import Image from "next/image";
 import StarIcon from '@mui/icons-material/Star';
 import { ProductData } from '@/app/types/product';
-import { Header } from '../../components/header';
+import { Header } from '../../../components/header';
 
-const DetailAllProduct = () => {
+export default function DetailAllProduct() {
+    
     const { allProducts, initializeAllProduct } = useProductStore();
 
     useEffect(() => {
@@ -58,4 +59,3 @@ const DetailAllProduct = () => {
     );
 };
 
-export default DetailAllProduct;

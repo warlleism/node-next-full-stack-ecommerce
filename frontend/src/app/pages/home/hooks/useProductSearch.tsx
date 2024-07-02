@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import useProductStore from '../stores/productStorage';
 import { useRouter } from 'next/navigation';
+import useProductStore from '@/app/stores/productStorage';
 
 const useProductSearch = () => {
 

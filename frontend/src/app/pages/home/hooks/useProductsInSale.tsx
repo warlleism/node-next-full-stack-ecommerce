@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { ProductData } from '../types/product';
+import { ProductData } from '../../../types/product';
 import { useMemo, useState } from 'react';
 
 const useProductsInSale = () => {

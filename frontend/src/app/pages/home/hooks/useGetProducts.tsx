@@ -1,14 +1,15 @@
 import { useQuery } from 'react-query';
-import { ProductData } from '../types/product';
+import { ProductData } from '../../../types/product';
 import { useMemo, useState } from 'react';
-import useProductStore from '../stores/productStorage';
-import { getValidToken } from '../utils/validToken';
+import useProductStore from '../../../stores/productStorage';
+import { getValidToken } from '../../../utils/validToken';
 
 const useProductsWithFavorites = () => {
 
     const { addToFavorite } = useProductStore();
     const [pages, setPages] = useState(1);
     const [qtdItens, setQtdItens] = useState(17);
+    const { listProducts, listAllProducts } = useProductStore()
 
     const fetchProducts = useMemo(() => async () => {
         const token = getValidToken();
@@ -22,6 +23,8 @@ const useProductsWithFavorites = () => {
             });
         }
 
+        listAllProducts(data.data)
+
         return data?.data || [];
     }, [pages, qtdItens, addToFavorite]);
 
@@ -32,7 +35,7 @@ const useProductsWithFavorites = () => {
     );
 
     return {
-        products,
+        listProducts,
         isLoading,
         isError,
         error,

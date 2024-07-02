@@ -6,7 +6,11 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "./utils/react-query";
-import CartSideBar from "./pages/components/cartSideBar";
+import CartSideBar from "./components/cartSideBar";
+import FormDrawerComponent from "./components/formDrawerComponent/createProduct";
+import useUserStore from "./stores/userStorage";
+import { useEffect } from "react";
+import useCartStore from "./stores/cartStorage";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,6 +19,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const { initializeUser } = useUserStore();
+  const { initializeCart } = useCartStore();
+
+  useEffect(() => {
+    initializeUser();
+    initializeCart();
+  }, [initializeUser]);
 
 
   return (
@@ -25,6 +37,7 @@ export default function RootLayout({
             {children}
             <ToastContainer />
             <CartSideBar />
+            <FormDrawerComponent />
           </body>
         </html>
       </QueryClientProvider>

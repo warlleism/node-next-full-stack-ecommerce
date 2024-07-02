@@ -6,6 +6,7 @@ import { favoriteRepository } from "../repositories/favoriteRepository";
 import { JwtPayload } from "jsonwebtoken";
 import jwt from 'jsonwebtoken'
 import fs from 'fs';
+import { saleRepository } from "../repositories/saleRepository";
 
 export class ProductController {
 
@@ -25,7 +26,11 @@ export class ProductController {
         const filename = `${name}.png`;
         let imagePath;
 
+
         imagePath = await saveImageToFile(image, filename);
+
+        console.log(imagePath)
+
 
         const newUser = productRepository.create({
             name,
@@ -72,9 +77,13 @@ export class ProductController {
                         return { ...product, image: data };
                     }));
 
+                    const sales = await saleRepository.find();
+                    const ids = sales.map(sale => String(sale.product_id));
+                    const filteredProducts = allProducts.filter(item => !ids.includes(String(item.id)));
+
                     return res.status(200).json({
                         message: "All products with images!",
-                        data: allProducts,
+                        data: filteredProducts,
                         favorites: productMap,
                         currentPage: page,
                         totalPages: Math.ceil(total / limit),
@@ -169,25 +178,42 @@ export class ProductController {
     }
 
     async update(req: Request, res: Response) {
+        try {
+            const { id, name, image, description, price, rate, category } = req.body;
 
-        const { id, name, image, description, price, rate, category } = req.body;
-        if (!name || !image || !description || !price || !rate || !category) { throw new UnauthorizedError("Data needs to be filled in") }
+            if (!name || !image || !description || !price || !rate || !category) {
+                throw new UnauthorizedError("All fields must be filled in");
+            }
 
-        const product = await productRepository.findOneBy({ id: id });
-        if (!product) {
-            throw new BadRequestError('Product not found.')
+            const product = await productRepository.findOneBy({ id });
+
+            if (!product) {
+                throw new BadRequestError('Product not found.');
+            }
+
+            product.name = name;
+            product.description = description;
+            product.price = price;
+            product.rate = rate;
+            product.category = category;
+
+            const filename = `${name}.png`;
+            let imagePath;
+
+            imagePath = await saveImageToFile(image, filename);
+
+            product.image = imagePath;
+
+            await productRepository.save(product);
+
+            res.status(200).json({ message: 'Product has been updated successfully', data: product });
+        } catch (error) {
+            if (error instanceof UnauthorizedError || error instanceof BadRequestError) {
+                res.status(400).json({ error: error.message });
+            } else {
+                res.status(500).json({ error: 'Internal Server Error' });
+            }
         }
-
-        product.category
-        product.description
-        product.image
-        product.name
-        product.price
-        product.rate
-
-        await productRepository.save(product);
-
-        res.status(200).json({ massage: 'product has been updated successfully' });
     }
 
 

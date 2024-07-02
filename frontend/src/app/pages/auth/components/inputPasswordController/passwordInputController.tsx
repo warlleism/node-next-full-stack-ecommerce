@@ -10,7 +10,7 @@ interface CustomTextFieldProps {
     errors: any;
 }
 
-const PasswordCustomTextField: React.FC<CustomTextFieldProps> = ({ label, register, errors }) => {
+export default function PasswordCustomTextField({ label, register, errors }: CustomTextFieldProps) {
 
     const [showPassword, setShowPassword] = React.useState(false);
 
@@ -23,22 +23,12 @@ const PasswordCustomTextField: React.FC<CustomTextFieldProps> = ({ label, regist
     return (
         <div>
             <FormControl
-                sx={{
-                    background: "transparent",
-                    border: 0,
-                }} variant="filled">
+                sx={{ background: "transparent", border: 0 }} variant="filled">
                 <InputLabel
-                    style={{
-                        fontSize: '1rem',
-                        left: -13,
-                        color: "#1a1a1abd",
-                    }}
+                    style={{ fontSize: '1rem', left: -13, color: "#1a1a1abd" }}
                     htmlFor="filled-adornment-password">Senha:</InputLabel>
                 <FilledInput
-                    style={{
-                        position: "relative",
-                        background: "transparent",
-                    }}
+                    style={{ position: "relative", background: "transparent" }}
                     {...register}
                     label={label}
                     variant="none"
@@ -47,15 +37,7 @@ const PasswordCustomTextField: React.FC<CustomTextFieldProps> = ({ label, regist
                     endAdornment={
                         <InputAdornment position='end'>
                             <IconButton
-                                style={{
-                                    width: 30,
-                                    height: 30,
-                                    background: "transparent",
-                                    color: "#1a1a1abd",
-                                    right: 20,
-                                    top: '0%',
-                                    position: 'absolute',
-                                }}
+                                style={{ width: 30, height: 30, background: "transparent", color: "#1a1a1abd", right: 20, top: '0%', position: 'absolute' }}
                                 aria-label="toggle password visibility"
                                 onClick={handleClickShowPassword}
                                 onMouseDown={handleMouseDownPassword}
@@ -72,5 +54,4 @@ const PasswordCustomTextField: React.FC<CustomTextFieldProps> = ({ label, regist
     );
 }
 
-export default PasswordCustomTextField;
 

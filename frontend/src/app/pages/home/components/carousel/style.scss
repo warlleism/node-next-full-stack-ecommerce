@@ -11,15 +11,15 @@
     padding: 0px 10px 0 10px;
 
     .container-carousel-see-all {
-        width: 94%;
-        text-align: end;
-        cursor: pointer;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
         font-weight: 800;
         color: rgb(32, 32, 32);
+        gap: 5px;
 
-        @media (max-width: 1407px) {
-            width: 86%;
-        }
+      
     }
 
     @media (max-width: 918px) {
@@ -93,7 +93,7 @@
 
                     .card-icon-favorite {
                         position: absolute;
-                        top: 10px;
+                        top: 0px;
                         right: 10px;
                         cursor: pointer;
                     }

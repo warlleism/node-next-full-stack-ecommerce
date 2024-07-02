@@ -1,0 +1,16 @@
+.container-button-edit-icon {
+    position: absolute;
+    left: 0;
+    color: rgba(0, 0, 0, 0.452);
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+    box-shadow: 0px .8px 1px black;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.075);
+    cursor: pointer;
+    z-index: 999;
+}

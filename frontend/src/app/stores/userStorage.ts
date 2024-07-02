@@ -19,7 +19,9 @@ const useUserStore = create<UserState>((set) => ({
     if (typeof window !== 'undefined') {
       const storedUser = localStorage.getItem('user');
       if (storedUser) {
-        set({ user: JSON.parse(storedUser) });
+        const user = JSON.parse(storedUser)
+        user.isAdmin = JSON.parse(user.isAdmin.toLowerCase());
+        set({ user: user });
       }
     }
   },

@@ -4,6 +4,7 @@ import { create } from 'zustand';
 import { ProductData } from '../types/product';
 
 interface ProductState {
+  listProducts: ProductData[]
   product: ProductData | null;
   allProducts: ProductData[];
   favorite: number[];
@@ -13,12 +14,27 @@ interface ProductState {
   removeFromFavorite: (numberToRemove: string) => void;
   initializeOneProduct: () => void;
   initializeAllProduct: () => void;
+  listAllProducts: (items: ProductData[]) => void
+  updateAllProducts: (items: ProductData) => void
 }
 
 const useProductStore = create<ProductState>((set) => ({
+  listProducts: [],
+  allProducts: [],
   favorite: [],
   product: null,
-  allProducts: [],
+  listAllProducts: (items: ProductData[]) => {
+    set(() => ({
+      listProducts: items
+    }));
+  },
+  updateAllProducts: (item: ProductData) => {
+    set((state) => {
+      const updatedItems = state.listProducts.filter((e: ProductData) => e.id !== item.id);
+      const newItems = [...updatedItems, item];
+      return { listProducts: newItems };
+    });
+  },
   initializeOneProduct: () => {
     if (typeof window !== 'undefined') {
       const storedProduct = localStorage.getItem('product');
@@ -48,7 +64,7 @@ const useProductStore = create<ProductState>((set) => ({
       localStorage.setItem('product', JSON.stringify(product));
     }
     set((state) => ({
-      product: product,
+      product: product
     }));
   },
   addToFavorite: (numberToAdd) => {

@@ -6,13 +6,13 @@ export interface Product {
 
 export interface ProductData {
     userId?: number;
-    id: number;
+    id: any;
     name: string;
     image: string;
     category: string;
     description: string;
-    price: number | string;
-    rate: number | string;
+    price: any;
+    rate: number | string | any;
     qtd?: number;
     sale?: number | string;
     defaultPrice?: number | string;

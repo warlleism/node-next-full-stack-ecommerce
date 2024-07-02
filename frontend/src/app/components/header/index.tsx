@@ -6,25 +6,20 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import useUserStore from '@/app/stores/userStorage';
 import PersonIcon from '@mui/icons-material/Person';
-import useProductSearch from '@/app/hooks/useProductSearch';
 import useProductStore from '@/app/stores/productStorage';
 import ButtonLogout from '../logoutButton/logout';
-import ecommerceIcon from '../../../assets/ecommece-logo.png'
+import ecommerceIcon from '../../assets/ecommece-logo.png'
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import useCartStore from '@/app/stores/cartStorage';
+import useProductSearch from '@/app/pages/home/hooks/useProductSearch';
 
 export function Header() {
 
     const [animate, setAnimate] = useState(false);
     const { detailProduct } = useProductStore();
-    const { user, initializeUser } = useUserStore();
-    const { cart, initializeCart, showCart } = useCartStore();
+    const { user } = useUserStore();
+    const { cart, showCart } = useCartStore();
     const { error, products, inputRef, handleInputChange, inputRefContainer } = useProductSearch()
-
-    useEffect(() => {
-        initializeUser();
-        initializeCart();
-    }, [initializeUser]);
 
     useEffect(() => {
         if (cart.length > 0) {

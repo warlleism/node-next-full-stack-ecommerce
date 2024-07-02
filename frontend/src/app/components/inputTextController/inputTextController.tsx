@@ -5,15 +5,17 @@ interface CustomTextFieldProps {
     label: string;
     register: any;
     errors: any;
+    type: string
 }
 
-export default function CustomTextField({ label, register, errors }: CustomTextFieldProps) {
+export default function ControllerTextField({ type, label, register, errors }: CustomTextFieldProps) {
     return (
-        <div>
+        <div className='form-text-field'>
             <TextField
+                className='input-text-field'
                 InputProps={{ style: { color: '#1a1a1abd' } }}
                 InputLabelProps={{ style: { color: '#1a1a1abd' } }}
-                type="text"
+                type={type}
                 {...register}
                 label={label}
                 variant="standard"

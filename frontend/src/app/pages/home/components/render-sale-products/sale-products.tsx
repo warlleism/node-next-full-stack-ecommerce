@@ -1,6 +1,6 @@
 'use client';
 
-import useProductsInSale from '@/app/hooks/useProductsInSale';
+import useProductsInSale from '../../hooks/useProductsInSale';
 import { CarouselComponent } from '../carousel/carousel';
 import PercentIcon from '@mui/icons-material/Percent';
 import 'swiper/swiper-bundle.css';
@@ -9,6 +9,10 @@ import './style.scss';
 export function RenderSaleProducts() {
 
     const { products } = useProductsInSale();
+
+    if (products.length === 0) {
+        return null
+    }
 
     return (
         <div className='main-sale-our-products-container'>

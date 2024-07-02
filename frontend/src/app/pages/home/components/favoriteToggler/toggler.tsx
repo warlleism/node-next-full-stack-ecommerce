@@ -7,7 +7,7 @@ import React from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useRouter } from 'next/navigation';
 
-const FavoriteComponent = ({ id }: any) => {
+export default function FavoriteComponent({ id }: any) {
 
     const router = useRouter()
     const { user } = useUserStore()
@@ -26,4 +26,3 @@ const FavoriteComponent = ({ id }: any) => {
     );
 };
 
-export default FavoriteComponent;
