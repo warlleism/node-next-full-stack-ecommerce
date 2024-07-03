@@ -19,14 +19,25 @@ const useGetDetailAllProducts = () => {
         }
     }, []);
 
+    const baseUrls = {
+        products: 'http://localhost:3001/product',
+        sales: 'http://localhost:3001/sale'
+    };
+
     const filteredUrl = useMemo(() => {
-        const baseUrl = search !== null
-            ? `http://localhost:3001/product/search?page=${page}&limit=${qtdItens}`
-            : `http://localhost:3001/product/getAllProducts?page=${page}&limit=${qtdItens}`;
-        return urlLocal === 'sale-products'
-            ? `http://localhost:3001/sale/all?page=${page}&limit=${qtdItens}`
-            : baseUrl;
+        let baseUrl = baseUrls.products + '/getAllProducts';
+
+        if (search !== null) {
+            baseUrl = baseUrls.products + '/search';
+        } else if (urlLocal === 'sale-products') {
+            baseUrl = baseUrls.sales + '/all';
+        }
+
+        const urlParams = `?page=${page}&limit=${qtdItens}`;
+
+        return baseUrl + urlParams;
     }, [page, qtdItens, search, urlLocal]);
+
 
     const fetchProducts = async () => {
 
