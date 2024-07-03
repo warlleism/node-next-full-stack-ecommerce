@@ -4,21 +4,26 @@ import './style.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import ButtonLogout from '../logoutButton/logout';
 import useUserStore from '@/app/stores/userStorage';
+import useCartStore from '@/app/stores/cartStorage';
 import PersonIcon from '@mui/icons-material/Person';
 import useProductStore from '@/app/stores/productStorage';
-import ButtonLogout from '../logoutButton/logout';
-import ecommerceIcon from '../../assets/ecommece-logo.png'
 import LocalMallIcon from '@mui/icons-material/LocalMall';
-import useCartStore from '@/app/stores/cartStorage';
+import ecommerceIcon from '../../assets/ecommece-logo.png';
 import useProductSearch from '@/app/pages/home/hooks/useProductSearch';
+import { ProductData } from '@/app/types/product';
+import useFilterProductStorage from '@/app/stores/filterProductStorage';
 
 export function Header() {
 
-    const [animate, setAnimate] = useState(false);
-    const { detailProduct } = useProductStore();
+    const route = useRouter()
     const { user } = useUserStore();
     const { cart, showCart } = useCartStore();
+    const { detailProduct } = useProductStore();
+    const [animate, setAnimate] = useState(false);
+    const { changeSearch } = useFilterProductStorage()
     const { error, products, inputRef, handleInputChange, inputRefContainer } = useProductSearch()
 
     useEffect(() => {
@@ -29,44 +34,52 @@ export function Header() {
         }
     }, [cart.length]);
 
-    const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    function handleClick(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        handleInputChange(1, 30)
+        try {
+            if (inputRef.current) {
+                changeSearch(inputRef.current?.value)
+                localStorage.setItem('detailAll', inputRef.current?.value)
+            }
+            route.push('/pages/detail/detailAll')
+        } catch (error) {
+            console.log(error)
+        }
     };
 
-    const handleClick = () => {
-        const syntheticEvent = { preventDefault: () => { } } as React.FormEvent<HTMLFormElement>;
-        handleFormSubmit(syntheticEvent);
-    };
+    function cartlength() {
+        const qtdItem = cart.filter((items) => items.userId == user?.id).length
+        return qtdItem
+    }
 
     return (
         <div className='main-container-header'>
             <Link href={'/'} className='container-image'>
                 <Image
-                    className='image'
-                    src={ecommerceIcon}
+                    priority
                     alt='logo'
                     width={50}
                     height={50}
-                    priority
+                    className='image'
+                    src={ecommerceIcon}
                 />
             </Link>
             <div className='search-container'>
                 <form
                     className='input-container'
-                    onSubmit={handleFormSubmit}>
+                    onSubmit={handleClick}>
                     <input
                         className='input-search'
                         ref={inputRef}
                         type='text'
                         placeholder='Busque aqui...'
-                        onChange={() => handleInputChange(1, 4)}
+                        onKeyDown={() => { handleInputChange() }}
                     />
                 </form>
                 {
                     products.length !== 0 ?
                         <div className='container-search-list' ref={inputRefContainer}>
-                            {products?.map((item: any, index) => (
+                            {products?.map((item: ProductData, index) => (
                                 <Link
                                     style={{ borderTop: index !== 0 ? '1px rgba(0, 0, 0, 0.075) solid' : 'none' }}
                                     href={'/pages/detail/detailOne'}
@@ -89,7 +102,7 @@ export function Header() {
                                 </Link>
                             ))}
                             <div
-                                onClick={handleClick}
+                                onClick={(event: React.MouseEvent<HTMLDivElement>) => handleClick(event as unknown as React.FormEvent<HTMLFormElement>)}
                                 style={{ fontWeight: 700, color: '#000000b0', cursor: 'pointer' }}>
                                 Ver Todos...
                             </div>
@@ -121,7 +134,7 @@ export function Header() {
                 id='qtd-cart'
                 className={`container-header-bag-number ${animate ? 'animated' : ''}`}
                 onClick={() => showCart()}>
-                <div>{cart?.length}</div>
+                <div>{cartlength()}</div>
                 <LocalMallIcon />
             </div>
         </div>

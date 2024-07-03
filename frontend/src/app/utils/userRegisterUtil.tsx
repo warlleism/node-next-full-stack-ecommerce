@@ -1,5 +1,5 @@
-import { toast } from 'react-toastify'; 
-import { signIn } from 'next-auth/react'; 
+import { toast } from 'react-toastify';
+import { signIn } from 'next-auth/react';
 import { User } from '../types/User';
 
 interface SubmitHandlerParams {
@@ -39,7 +39,7 @@ export const handleFormSubmit = async ({ data, event, setLoading, setUser }: Sub
             id: result.user.id,
             name: result.user.name,
             email: result.user.email,
-            callbackUrl: '/pages/home'
+            callbackUrl: ''
         });
     } catch (error) {
         console.error(error);

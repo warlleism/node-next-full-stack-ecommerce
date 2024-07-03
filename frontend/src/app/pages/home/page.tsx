@@ -1,3 +1,5 @@
+'use client'
+
 import useUserStore from "@/app/stores/userStorage";
 import { RenderProducts } from "./components/render-products/products"
 import { RenderSaleProducts } from "./components/render-sale-products/sale-products"

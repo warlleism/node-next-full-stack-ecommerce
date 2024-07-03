@@ -5,13 +5,13 @@ import Image from "next/image";
 import StarIcon from '@mui/icons-material/Star';
 import { ProductData } from '@/app/types/product';
 import { Header } from '../../../components/header';
-import useGetDetailAllProducts from '../hooks/useGetDetailAllProducts';
 import CircularProgress from '@mui/material/CircularProgress';
+import useGetDetailAllProducts from '../hooks/useGetDetailAllProducts';
 
 
 export default function DetailAllProduct() {
 
-    const { products, isLoading } = useGetDetailAllProducts();
+    const { products, setPage, totalPages } = useGetDetailAllProducts();
 
     const renderStars = (rate: number | string) => {
         const stars = Array(3).fill(null).map((_, index) => (
@@ -20,11 +20,20 @@ export default function DetailAllProduct() {
         return <div>{stars} ({rate})</div>;
     };
 
+    const pagination = () => {
+        const stars = Array(totalPages).fill(null).map((_, index) => (
+            <li key={index} onClick={() => setPage(index + 1)}>{index}</li>
+        ));
+        return stars
+    };
+
     return (
         <>
             <Header />
-            {!isLoading ? (
-                products.map((item: ProductData, index: number) => (
+            <ul>{pagination()}</ul>
+
+            {products ? (
+                products?.map((item: ProductData, index: number) => (
                     <div key={index} className="main-container-detailAll">
                         <div className="container-detailAll-name">{item?.name}</div>
                         <div className="container-detailAll-info">
@@ -51,7 +60,6 @@ export default function DetailAllProduct() {
                 ))
             ) : (
                 <div className='container-detailAll-loading'>
-
                     <CircularProgress
                         variant="indeterminate"
                         disableShrink
@@ -60,6 +68,7 @@ export default function DetailAllProduct() {
                     />
                 </div>
             )}
+
         </>
     );
 };

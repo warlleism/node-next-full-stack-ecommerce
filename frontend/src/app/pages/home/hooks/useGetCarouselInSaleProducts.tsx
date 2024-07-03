@@ -8,7 +8,10 @@ const useGetCarouselInSaleProducts = () => {
     const [qtdItens, setQtdItens] = useState(30);
 
     const fetchProducts = useMemo(() => async () => {
-        const response = await fetch(`http://localhost:3001/sale/all?page=${pages}&limit=${qtdItens}`);
+        const response = await fetch(`http://localhost:3001/sale/all?page=${pages}&limit=${qtdItens}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+        });
         const data = await response.json();
 
         const priceSale = data?.data.map((item: ProductData) => {

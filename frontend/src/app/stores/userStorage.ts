@@ -20,7 +20,7 @@ const useUserStore = create<UserState>((set) => ({
       const storedUser = localStorage.getItem('user');
       if (storedUser) {
         const user = JSON.parse(storedUser)
-        user.isAdmin = JSON.parse(user.isAdmin.toLowerCase());
+        user.isAdmin = JSON.parse(user.isAdmin);
         set({ user: user });
       }
     }

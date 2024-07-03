@@ -47,39 +47,68 @@ export class ProductController {
     }
 
     async getAll(req: Request, res: Response) {
-
-        const { authorization } = req.headers;
-
         const page = parseInt(req.query.page as string) || 1;
         const limit = parseInt(req.query.limit as string) || 10;
 
-        if (typeof authorization !== 'undefined') {
-            const token = authorization.split(' ')[1];
+        const fetchProducts = async () => {
+            const [products, total] = await productRepository.findAndCount({
+                skip: (page - 1) * limit,
+                take: limit,
+            });
 
-            if (token) {
-                try {
+            if (!products.length) throw new Error("No products found.");
+
+            const allProducts = await Promise.all(products.map(async product => {
+                const data = await fs.promises.readFile(product.image, 'base64');
+                return { ...product, image: data };
+            }));
+            return { allProducts, total };
+        };
+
+        try {
+            const { allProducts, total } = await fetchProducts();
+            return res.status(200).json({
+                message: "All products with images!",
+                data: allProducts,
+                currentPage: page,
+                totalPages: Math.ceil(total / limit),
+            });
+        } catch (error) {
+            return res.status(404).json({ message: error });
+        }
+    }
+
+    async getOurProducts(req: Request, res: Response) {
+        const { authorization } = req.headers;
+        const page = parseInt(req.query.page as string) || 1;
+        const limit = parseInt(req.query.limit as string) || 10;
+
+        const fetchProducts = async () => {
+            const [products, total] = await productRepository.findAndCount({
+                skip: (page - 1) * limit,
+                take: limit,
+            });
+            if (!products.length) throw new Error("No products found.");
+            const allProducts = await Promise.all(products.map(async product => {
+                const data = await fs.promises.readFile(product.image, 'base64');
+                return { ...product, image: data };
+            }));
+            return { allProducts, total };
+        };
+
+        try {
+            if (authorization) {
+                const token = authorization.split(' ')[1];
+                if (token) {
                     const { id } = jwt.verify(token, process.env.JWT_PASS ?? '') as JwtPayload;
                     const favoriteExists = await favoriteRepository.findBy({ user_id: id });
-                    const productMap = favoriteExists.map((e) => e.product_id);
+                    const productMap = favoriteExists.map(e => e.product_id);
 
-                    const [products, total] = await productRepository.findAndCount({
-                        skip: (page - 1) * limit,
-                        take: limit,
-                    });
-
-                    if (!products || products.length === 0) {
-                        return res.status(404).json({ message: "No products found." });
-                    }
-
-                    const allProducts = await Promise.all(products.map(async product => {
-                        const imagePath = product.image;
-                        const data = await fs.promises.readFile(imagePath, 'base64');
-                        return { ...product, image: data };
-                    }));
+                    const { allProducts, total } = await fetchProducts();
 
                     const sales = await saleRepository.find();
-                    const ids = sales.map(sale => String(sale.product_id));
-                    const filteredProducts = allProducts.filter(item => !ids.includes(String(item.id)));
+                    const saleIds = new Set(sales.map(sale => String(sale.product_id)));
+                    const filteredProducts = allProducts.filter(product => !saleIds.has(String(product.id)));
 
                     return res.status(200).json({
                         message: "All products with images!",
@@ -88,38 +117,27 @@ export class ProductController {
                         currentPage: page,
                         totalPages: Math.ceil(total / limit),
                     });
-                } catch (error) {
-                    return res.status(401).json({ message: 'Token not authorized' })
                 }
+            } else {
+                const { allProducts, total } = await fetchProducts();
+                return res.status(200).json({
+                    message: "All products with images!",
+                    data: allProducts,
+                    currentPage: page,
+                    totalPages: Math.ceil(total / limit),
+                });
             }
-        } else {
-            const [products, total] = await productRepository.findAndCount({
-                skip: (page - 1) * limit,
-                take: limit,
-            });
-
-            if (!products || products.length === 0) {
-                return res.status(404).json({ message: "No products found." });
+        } catch (error) {
+            if (error) {
+                return res.status(404).json({ message: error });
             }
-
-            const allProducts = await Promise.all(products.map(async product => {
-                const imagePath = product.image;
-                const data = await fs.promises.readFile(imagePath, 'base64');
-                return { ...product, image: data };
-            }));
-
-            return res.status(200).json({
-                message: "All products with images!",
-                data: allProducts,
-                currentPage: page,
-                totalPages: Math.ceil(total / limit),
-            });
+            return res.status(401).json({ message: 'Token not authorized' });
         }
     }
 
+
     async getSearch(req: Request, res: Response) {
         const { search } = req.body;
-
         const page = parseInt(req.query.page as string) || 1;
         const limit = parseInt(req.query.limit as string) || 10;
 

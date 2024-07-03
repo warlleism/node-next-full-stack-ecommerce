@@ -14,7 +14,7 @@ const useGetCarouselOurProducts = () => {
     const fetchProducts = useMemo(() => async () => {
         const token = getValidToken();
         const headers: HeadersInit = token ? { 'Authorization': `Bearer ${token}` } : {};
-        const response = await fetch(`http://localhost:3001/product/all?page=${pages}&limit=${qtdItens}`, { headers });
+        const response = await fetch(`http://localhost:3001/product/ourProducts?page=${pages}&limit=${qtdItens}`, { headers });
         const data = await response.json();
 
         if (data?.favorites) {

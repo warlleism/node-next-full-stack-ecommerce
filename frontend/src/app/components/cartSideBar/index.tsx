@@ -1,23 +1,26 @@
 'use client'
 
 import './style.scss';
+import Image from 'next/image';
+import { useEffect } from 'react';
 import { Drawer } from "@mui/material";
-import useCartStore from "@/app/stores/cartStorage";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { useRouter } from 'next/navigation';
 import AddIcon from '@mui/icons-material/Add';
+import CloseIcon from '@mui/icons-material/Close';
+import useCartStore from "@/app/stores/cartStorage";
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import useUserStore from '@/app/stores/userStorage';
 import useProductStore from '@/app/stores/productStorage';
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import CloseIcon from '@mui/icons-material/Close';
-import { useEffect } from 'react';
 
 export default function CartSideBar() {
 
     const route = useRouter()
+    const { user } = useUserStore()
     const { detailProduct } = useProductStore();
+
     const {
         show,
         cart,
@@ -49,12 +52,13 @@ export default function CartSideBar() {
                     </div>
                 </div>
                 <TransitionGroup className='container-cart-list-itens'>
-                    {cart.map((item) => (
+                    {cart.map((item) => item.userId === user?.id && (
                         <CSSTransition
                             key={item.id}
                             classNames="item"
                             timeout={500}>
-                            <div className='container-itens-cart' key={item.id}>
+                            <div
+                                className='container-itens-cart' key={item.id}>
                                 <Image
                                     className="image-cart"
                                     style={{ objectFit: "contain" }}

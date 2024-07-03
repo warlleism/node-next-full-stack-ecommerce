@@ -17,17 +17,25 @@ import SkeletonComponent from '../skeleton/skeleton';
 import ButtonEditProduct from '@/app/components/buttonEdit/edit';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import useFilterProductStorage from '@/app/stores/filterProductStorage';
 
 export function CarouselComponent({ products, scroll }: any) {
 
     const route = useRouter()
     const { detailProduct } = useProductStore();
+    const { changeSearch } = useFilterProductStorage();
+
+    function redirect() {
+        changeSearch(null)
+        localStorage.setItem('detailAll', scroll)
+        setTimeout(() => route.push('/pages/detail/detailAll'), 400)
+    }
 
     return (
         <div className="container-cards">
             <div className='container-carousel-see-all'>
                 <div
-                    onClick={() => { route.push('/pages/detail/detailAll') }}
+                    onClick={() => redirect()}
                     style={{ cursor: 'pointer', width: 80, textAlign: 'center' }}>Ver Todos</div>
             </div>
             <div className='container-caroussel'>
