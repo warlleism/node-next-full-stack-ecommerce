@@ -7,7 +7,7 @@ import { ProductData } from '../../../types/product';
 const useGetDetailAllProducts = () => {
 
     const [page, setPage] = useState(1);
-    const [qtdItens, setQtdItens] = useState(4);
+    const [qtdItens, setQtdItens] = useState(12);
     const { addToFavorite } = useProductStore();
     const { search } = useFilterProductStorage();
     const [urlLocal, setUrlLocal] = useState<string | null>(null);
@@ -25,12 +25,14 @@ const useGetDetailAllProducts = () => {
     };
 
     const filteredUrl = useMemo(() => {
-        let baseUrl = baseUrls.products + '/getAllProducts';
+        let baseUrl;
 
         if (search !== null) {
             baseUrl = baseUrls.products + '/search';
         } else if (urlLocal === 'sale-products') {
             baseUrl = baseUrls.sales + '/all';
+        } else if (urlLocal === 'our-products') {
+            baseUrl = baseUrls.products + '/getAllProducts'
         }
 
         const urlParams = `?page=${page}&limit=${qtdItens}`;
@@ -40,7 +42,6 @@ const useGetDetailAllProducts = () => {
 
 
     const fetchProducts = async () => {
-
         try {
             const response = await fetch(filteredUrl, {
                 method: 'POST',
@@ -68,7 +69,7 @@ const useGetDetailAllProducts = () => {
     };
 
     const { data: products = [], isLoading, isError, error, refetch } = useQuery<ProductData[]>(
-        ['get_all_products', page, qtdItens, search],
+        ['get_all_products', page, qtdItens, search, urlLocal],
         fetchProducts,
         { staleTime: 10000 }
     );

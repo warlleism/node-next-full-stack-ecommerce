@@ -1,36 +1,57 @@
-.main-container-detail {
-    width: 90%;
-    margin: 0 auto;
-
-    .container-detail-info {
-        display: flex;
-        width: 100%;
-
-        .container-detail-img {
-            width: 50%;
-            height: 500px;
-          .image-detail{
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-          }
-        }
-
-        .container-detail-buy {
-            width: 50%;
-            height: 500px;
-            background-color: rgba(43, 43, 43, 0.075);
-        }
-    }
-}
-
-.container-detailAll-loading{
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0;
+.main-container-detail-all-container {
   width: 100%;
-  height: 100%;
-  background-color: #0000003b;
+  display: flex;
+  flex-direction: column;
+
+  .list-filter-products-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .container-cards-detail-all-container {
+      width: 78%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .container-filter-container {
+      width: 22%;
+      display: flex;
+      position: relative;
+      justify-content: center;
+
+      .filter-detail-all-container {
+        width: 20vw;
+        height: 60vh;
+        position: fixed;
+        border-radius: 5px;
+        background-color: #f2f2f2;
+
+      }
+    }
+
+  }
+
+  .container-paginacao-detadetail-all-container {
+    gap: 20px;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    list-style: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .container-detailAll-loading {
+    top: 90px;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #0000003b;
+  }
 }
