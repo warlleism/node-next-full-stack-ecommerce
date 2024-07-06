@@ -45,8 +45,8 @@ export default function ControllerFileField({ initialImageSrc, errors, name, con
                     <Image
                         style={{ objectFit: "contain" }}
                         loading="eager"
-                        width={90}
-                        height={90}
+                        width={60}
+                        height={60}
                         src={`data:image/jpeg;base64,${imageBase64}`}
                         alt="Uploaded"
                     />
@@ -63,21 +63,22 @@ export default function ControllerFileField({ initialImageSrc, errors, name, con
                     accept="image/*"
                     onChange={handleFileChange}
                 />
-                {errors && <p style={{ color: "#0e0e0e85", fontSize: '.8rem' }}>{errors.message}</p>}
             </div>
-            <div style={{ width: "100%", display: 'flex', alignItems: 'center', gap: 5 }}>
+            <div style={{ width: "100%", display: 'flex', alignItems: 'center', gap: 5, position: "relative" }}>
                 {fileName ?
-                    <>
+                    <div style={{ position: "absolute", bottom: -15, display: 'flex', alignItems: 'center', gap: 5 }}>
                         <PhotoLibraryIcon style={{ fontSize: "1.2rem" }} />{fileName}
-                    </> :
-                    <>
-                        {
-                            nameFile !== undefined && <><PhotoLibraryIcon style={{ fontSize: "1.2rem" }} />{`${nameFile}.png`}</>
-                        }
-                    </>
+                    </div>
+                    :
+                    <div style={{ position: "absolute", bottom: -5 }}>
+                        {nameFile !== undefined && <><PhotoLibraryIcon style={{ fontSize: "1.2rem" }} />
+                            {`${nameFile}.png`}</>}
+                    </div>
                 }
+                <div style={{ position: "absolute", bottom: -5 }}>
+                    {errors && <p style={{ color: "#0e0e0e85", fontSize: '.8rem' }}>{errors.message}</p>}
+                </div>
             </div>
-
         </>
     );
 }

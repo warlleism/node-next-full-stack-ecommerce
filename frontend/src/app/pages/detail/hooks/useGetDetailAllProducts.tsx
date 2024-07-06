@@ -62,7 +62,15 @@ const useGetDetailAllProducts = () => {
             }
 
             setTotalPages(data.totalPages);
-            return data?.data || [];
+
+            const priceSale = data?.data.map((item: ProductData) => {
+                let valorDesconto = (Number(item.price) * Number(item.sale)) / 100;
+                let precoFinal = Number(item.price) - valorDesconto;
+                return item.sale ? { ...item, price: precoFinal, defaultPrice: item.price } : { ...item }
+            })
+
+            return priceSale || [];
+
         } catch (error) {
             throw new Error(`Error fetching products: ${error}`);
         }

@@ -17,7 +17,6 @@ export default function DetailAllProduct() {
         ));
         return stars
     };
-
     return (
         <>
             <Header />

@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { Drawer } from "@mui/material"
 import { toast } from 'react-toastify';
 import { useForm } from "react-hook-form";
+import CloseIcon from '@mui/icons-material/Close';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { getValidToken } from "@/app/utils/validToken";
 import useProductStore from "@/app/stores/productStorage";
@@ -24,6 +25,7 @@ const schema = z.object({
 });
 
 type Inputs = z.infer<typeof schema>;
+const initialProduct = { id: null, name: "", price: "", category: "", rate: "0", description: "", image: "" }
 
 export default function FormDrawerComponent() {
 
@@ -33,11 +35,11 @@ export default function FormDrawerComponent() {
     const { register, handleSubmit, formState: { errors }, setValue, control, reset } =
         useForm<Inputs>({
             resolver: zodResolver(schema),
-            defaultValues: newProduct ?? { id: null, name: "", price: "", category: "", rate: "0", description: "", image: "" },
+            defaultValues: newProduct ?? initialProduct,
         });
 
     function hiddenAndClearForm() {
-        reset({ id: null, name: "", price: "", category: "", rate: "0", description: "", image: "" });
+        reset(initialProduct);
         hiddenCrudContainer()
     }
 
@@ -72,7 +74,6 @@ export default function FormDrawerComponent() {
         }
     };
 
-
     return (
         <Drawer
             id="container-drawer"
@@ -80,7 +81,10 @@ export default function FormDrawerComponent() {
             open={showCrudContainer}
             onClose={() => hiddenAndClearForm()}>
             <form onSubmit={handleSubmit(onSubmit)} className="main-container-create-product">
-                <div className='title-form-drawer'>{!newProduct?.id ? "Novo Produto" : "Editar Produto"}</div>
+                <div className='title-form-drawer'>
+                    {!newProduct?.id ? "Novo Produto" : "Editar Produto"}
+                    <div onClick={hiddenCrudContainer} style={{ float: 'right', cursor: 'pointer' }}><CloseIcon /></div>
+                </div>
                 <ControllerTextField type="text" label="Titulo:" register={register('name')} errors={errors.name} />
                 <ControllerTextField type="number" label="Preço:" register={register('price')} errors={errors.price} />
                 <ControllerTextField type="text" label="Categoria:" register={register('category')} errors={errors.category} />

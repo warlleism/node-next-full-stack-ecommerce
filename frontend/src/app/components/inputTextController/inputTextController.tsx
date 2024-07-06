@@ -20,7 +20,9 @@ export default function ControllerTextField({ type, label, register, errors }: C
                 label={label}
                 variant="standard"
             />
-            {errors && <p style={{ color: "#0e0e0e85", fontSize: '.8rem' }}>{errors.message}</p>}
+            <div style={{ position: "absolute", bottom: -10 }}>
+                {errors && <p style={{ color: "#0e0e0e85", fontSize: '.8rem' }}>{errors.message}</p>}
+            </div>
         </div>
     );
 }

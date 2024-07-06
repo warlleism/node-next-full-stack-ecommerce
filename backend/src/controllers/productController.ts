@@ -148,12 +148,19 @@ export class ProductController {
         const products = await productRepository.find();
         const filteredProducts = products.filter(product => product.name.toLowerCase().includes(search.toLowerCase()));
 
-        if (filteredProducts.length === 0) { throw new BadRequestError('Product not found.') }
+        const sales = await saleRepository.find();
+
+        const itensWithSale = filteredProducts.map((data) => {
+            const saleInfo = sales.find((item) => item.product_id == data.id);
+            return saleInfo ? { ...data, sale: saleInfo.sale } : data;
+        });
+
+        if (itensWithSale.length === 0) { throw new BadRequestError('Product not found.') }
 
         const startIndex = (page - 1) * limit;
         const endIndex = page * limit;
 
-        const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
+        const paginatedProducts = itensWithSale.slice(startIndex, endIndex);
 
         const productsWithImages = paginatedProducts.map(product => {
             const imagePath = product.image;
@@ -161,7 +168,7 @@ export class ProductController {
             return { ...product, image: imageData };
         });
 
-        const totalPages = Math.ceil(filteredProducts.length / limit);
+        const totalPages = Math.ceil(itensWithSale.length / limit);
 
         return res.status(200).json({
             message: "Products found!",
@@ -169,7 +176,7 @@ export class ProductController {
             pagination: {
                 currentPage: page,
                 totalPages: totalPages,
-                totalItems: filteredProducts.length,
+                totalItems: itensWithSale.length,
                 itemsPerPage: limit
             }
         });
