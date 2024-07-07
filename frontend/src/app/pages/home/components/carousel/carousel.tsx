@@ -62,9 +62,9 @@ export function CarouselComponent({ products, scroll }: any) {
                                     key={item.id}
                                     className="product-card">
                                     {item.sale && <div className='container-sale-number'>{item?.sale}%</div>}
+                                    <FavoriteComponent id={item.id} />
+                                    <ButtonEditProduct item={item} sale={item?.sale} />
                                     <div className="card-image-container">
-                                        <FavoriteComponent id={item.id} />
-                                        <ButtonEditProduct item={item} sale={item?.sale} />
                                         <Image
                                             onClick={() => {
                                                 detailProduct(item)

@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ProductData } from "@/app/types/product";
 import useCartStore from '@/app/stores/cartStorage';
@@ -13,7 +12,7 @@ export function Button({ data }: { data: ProductData }) {
 
     const route = useRouter();
     const { user } = useUserStore()
-    const { id, price, } = data;
+    const { id, price } = data;
     const { cart, addProductToCart, showCart } = useCartStore();
     const isInCart = cart.some(item => item.id === id && item.userId === user?.id);
 

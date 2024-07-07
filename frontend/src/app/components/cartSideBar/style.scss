@@ -54,8 +54,9 @@
         }
 
         .container-cart-list-itens {
-            padding-bottom: 80px;
             height: 80%;
+            overflow: hidden;
+            padding-bottom: 80px;
         }
 
         .container-itens-cart {

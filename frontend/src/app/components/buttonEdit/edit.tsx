@@ -13,7 +13,7 @@ export default function ButtonEditProduct({ item, sale }: any) {
     return (
         <>{user?.isAdmin === true && <div
             onClick={() => getNewProduct(item)}
-            style={{ top: sale ? 40 : 0 }}
+            style={{ top: sale ? 50 : 10 }}
             className='container-button-edit-icon'><EditIcon /></div>}</>
     )
 }

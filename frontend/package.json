@@ -18,7 +18,7 @@
     "@mui/material-nextjs": "^5.15.11",
     "@tanstack/react-query": "^5.45.0",
     "@types/dom-view-transitions": "^1.0.4",
-    "cookies-next": "^4.2.1",
+    "@types/js-cookie": "^3.0.6",
     "js-cookie": "^3.0.5",
     "lodash.debounce": "^4.0.8",
     "next": "14.2.3",

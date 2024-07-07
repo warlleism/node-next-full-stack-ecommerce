@@ -6,14 +6,14 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ButtonLogout from '../logoutButton/logout';
+import { ProductData } from '@/app/types/product';
 import useUserStore from '@/app/stores/userStorage';
 import useCartStore from '@/app/stores/cartStorage';
 import PersonIcon from '@mui/icons-material/Person';
 import useProductStore from '@/app/stores/productStorage';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import ecommerceIcon from '../../assets/ecommece-logo.png';
-import useProductSearch from '@/app/pages/home/hooks/useProductSearch';
-import { ProductData } from '@/app/types/product';
+import useProductSearch from '@/app/hooks/useProductSearch';
 import useFilterProductStorage from '@/app/stores/filterProductStorage';
 
 export function Header() {

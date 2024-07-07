@@ -6,6 +6,7 @@ import useUserStore from '@/app/stores/userStorage';
 import React from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useRouter } from 'next/navigation';
+import './style.scss'
 
 export default function FavoriteComponent({ id }: any) {
 
