@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const { user, initializeUser } = useUserStore();
+  const { initializeUser } = useUserStore();
   const { initializeCart } = useCartStore();
 
   useEffect(() => {

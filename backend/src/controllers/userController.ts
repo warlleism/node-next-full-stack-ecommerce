@@ -45,8 +45,6 @@ export class UserController {
             user: userLogin,
             token: token,
         })
-
-
     }
 
 }

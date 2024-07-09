@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
+import { getValidToken } from '../utils/validToken';
+import useProductStore from '../stores/productStorage';
 
 const useProductSearch = () => {
     const [error, setError] = useState('');
@@ -6,6 +8,7 @@ const useProductSearch = () => {
     const inputRef = useRef<HTMLInputElement>(null);
     const inputRefContainer = useRef<HTMLInputElement>(null);
     let typingTimer: ReturnType<typeof setTimeout> | null = null;
+    const { addToFavorite } = useProductStore();
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -34,12 +37,18 @@ const useProductSearch = () => {
     }, []);
 
     const fetchProducts = useCallback(async (inputValue: string) => {
+
+        const token = getValidToken();
+
         if (inputValue.trim()) {
             const url = `http://localhost:3001/product/search?page=1&limit=4`;
             try {
                 const response = await fetch(url, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
                     body: JSON.stringify({ search: inputValue }),
                 });
 
@@ -48,8 +57,14 @@ const useProductSearch = () => {
                     setError('Produto não encontrado!');
                     return;
                 }
-
                 const data = await response.json();
+
+                if (data?.favorites) {
+                    data.favorites.forEach((favoriteId: string) => {
+                        addToFavorite(favoriteId);
+                    });
+                }
+
                 setProducts(data.data);
             } catch (error) {
                 console.error('Erro ao buscar produtos:', error);

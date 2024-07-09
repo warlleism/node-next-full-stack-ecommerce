@@ -8,8 +8,8 @@ interface ProductState {
   product: ProductData | null;
   favorite: number[];
   detailProduct: (product: ProductData) => void;
-  addToFavorite: (numberToAdd: string) => void;
-  removeFromFavorite: (numberToRemove: string) => void;
+  addToFavorite: (number: string) => void;
+  removeFromFavorite: (number: string) => void;
   initializeOneProduct: () => void;
   listAllProducts: (items: ProductData[]) => void
   updateAllProducts: (items: ProductData) => void

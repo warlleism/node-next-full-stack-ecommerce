@@ -70,7 +70,7 @@ export default function ControllerFileField({ initialImageSrc, errors, name, con
                         <PhotoLibraryIcon style={{ fontSize: "1.2rem" }} />{fileName}
                     </div>
                     :
-                    <div style={{ position: "absolute", bottom: -5 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', position: "absolute", bottom: -9 }}>
                         {nameFile !== undefined && <><PhotoLibraryIcon style={{ fontSize: "1.2rem" }} />
                             {`${nameFile}.png`}</>}
                     </div>

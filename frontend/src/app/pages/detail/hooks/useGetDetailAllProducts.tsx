@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import useProductStore from '../../../stores/productStorage';
 import useFilterProductStorage from '@/app/stores/filterProductStorage';
 import { ProductData } from '../../../types/product';
+import { getValidToken } from '@/app/utils/validToken';
 
 const useGetDetailAllProducts = () => {
 
@@ -42,10 +43,16 @@ const useGetDetailAllProducts = () => {
 
 
     const fetchProducts = async () => {
+        const token = getValidToken();
+
+
         try {
             const response = await fetch(filteredUrl, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify({ search }),
             });
 

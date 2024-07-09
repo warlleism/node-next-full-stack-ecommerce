@@ -49,6 +49,7 @@ export class ProductController {
     async getAll(req: Request, res: Response) {
         const page = parseInt(req.query.page as string) || 1;
         const limit = parseInt(req.query.limit as string) || 10;
+        const { authorization } = req.headers;
 
         const fetchProducts = async () => {
             const [products, total] = await productRepository.findAndCount({
@@ -67,9 +68,20 @@ export class ProductController {
 
         try {
             const { allProducts, total } = await fetchProducts();
+
+            let favorite_ids: number[] | null = authorization ? [] : null;
+            if (authorization) {
+                const token = authorization.split(' ')[1];
+                const { id } = jwt.verify(token, process.env.JWT_PASS ?? '') as JwtPayload;
+                const favoriteExists = await favoriteRepository.findBy({ user_id: id });
+                const productMap = favoriteExists.map(e => e.product_id);
+                favorite_ids = productMap;
+            }
+
             return res.status(200).json({
                 message: "All products with images!",
                 data: allProducts,
+                favorites: favorite_ids,
                 currentPage: page,
                 totalPages: Math.ceil(total / limit),
             });
@@ -140,6 +152,7 @@ export class ProductController {
         const { search } = req.body;
         const page = parseInt(req.query.page as string) || 1;
         const limit = parseInt(req.query.limit as string) || 10;
+        const { authorization } = req.headers;
 
         if (!search) {
             throw new BadRequestError('required product name');
@@ -170,9 +183,19 @@ export class ProductController {
 
         const totalPages = Math.ceil(itensWithSale.length / limit);
 
+        let ids: number[] | null = authorization ? [] : null;
+        if (authorization) {
+            const token = authorization.split(' ')[1];
+            const { id } = jwt.verify(token, process.env.JWT_PASS ?? '') as JwtPayload;
+            const favoriteExists = await favoriteRepository.findBy({ user_id: id });
+            const productMap = favoriteExists.map(e => e.product_id);
+            ids = productMap;
+        }
+
         return res.status(200).json({
             message: "Products found!",
             data: productsWithImages,
+            favorites: ids,
             pagination: {
                 currentPage: page,
                 totalPages: totalPages,

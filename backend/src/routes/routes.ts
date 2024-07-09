@@ -4,7 +4,6 @@ import { authMiddleware } from "../middlewares/authMiddleware";
 import { ProductController } from "../controllers/productController";
 import { FavoriteController } from "../controllers/favoriteController";
 import { SaleController } from "../controllers/saleController";
-import { CartController } from "../controllers/cartController";
 const routes = Router()
 
 //user endpoints
@@ -26,9 +25,5 @@ routes.post('/favorite/all', authMiddleware, new FavoriteController().get)
 
 //sale endpoints
 routes.post('/sale/all', new SaleController().get)
-
-//cart endpoints
-routes.post('/cart/create', authMiddleware, new CartController().create)
-routes.post('/cart/delete', authMiddleware, new CartController().delete)
 
 export default routes;

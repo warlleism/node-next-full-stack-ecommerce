@@ -25,6 +25,8 @@ export class SaleController {
                     const favoriteExists = await favoriteRepository.findBy({ user_id: id });
                     const productMap = favoriteExists.map((e) => e.product_id);
 
+                    console.log(productMap)
+
                     const sales = await saleRepository.find();
                     const ids = sales.map((sale) => sale.product_id);
 
@@ -48,6 +50,8 @@ export class SaleController {
                         const data = await fs.promises.readFile(imagePath, 'base64');
                         return { ...product, image: data };
                     }));
+
+                    
 
                     return res.status(200).json({
                         message: "Successfully fetched all products",

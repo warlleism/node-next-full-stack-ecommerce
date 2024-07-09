@@ -1,6 +1,7 @@
 'use client';
 
 import { create } from 'zustand';
+import { openDB } from 'idb';
 import { ProductData } from '../types/product';
 
 interface ProductState {
@@ -16,6 +17,20 @@ interface ProductState {
   removeProductFromCart: (productId: number) => void;
 }
 
+const DB_NAME = 'shoppingCartDB';
+const DB_VERSION = 1;
+const STORE_NAME = 'cart';
+
+const openCartDB = async () => {
+  return openDB(DB_NAME, DB_VERSION, {
+    upgrade(db) {
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true });
+      }
+    },
+  });
+};
+
 const useCartStore = create<ProductState>((set) => ({
   cart: [],
   fullPrice: 0,
@@ -23,129 +38,105 @@ const useCartStore = create<ProductState>((set) => ({
 
   showCart: () => {
     set((state) => ({
-      show: !state.show
+      show: !state.show,
     }));
   },
-  initializeCart: () => {
-    const user = localStorage.getItem('user');
-    const storedCart = localStorage.getItem('cart');
-    if (storedCart && user) {
-      set({ cart: JSON.parse(storedCart) });
+  initializeCart: async () => {
+    try {
+      const db = await openCartDB();
+      const tx = db.transaction(STORE_NAME, 'readonly');
+      const store = tx.objectStore(STORE_NAME);
+      const allProducts = await store.getAll();
+      set({ cart: allProducts });
+    } catch (error) {
+      console.error('Error initializing cart from IndexedDB:', error);
     }
   },
   addProductToCart: (product: ProductData) => {
-    set((state) => {
+    (async () => {
       try {
-        if (typeof window !== 'undefined') {
-          const cart = localStorage.getItem('cart');
-          let newCart: any = [];
-          if (cart) { newCart = JSON.parse(cart) }
-          newCart.push(product);
-          localStorage.setItem('cart', JSON.stringify(newCart));
-        }
+        const db = await openCartDB();
+        const tx = db.transaction(STORE_NAME, 'readwrite');
+        const store = tx.objectStore(STORE_NAME);
+        await store.add(product);
+        const allProducts = await store.getAll();
+        set({ cart: allProducts });
       } catch (error) {
-        console.error('Error storing item in cart:', error);
+        console.error('Error adding product to IndexedDB:', error);
       }
-      return {
-        cart: [...state.cart, product],
-      };
-    });
+    })();
   },
-
   removeProductFromCart: (productId: number) => {
-    set((state) => {
-      const updatedCart = state.cart.filter(product => product.id !== productId);
+    (async () => {
       try {
-        if (typeof window !== 'undefined') {
-          const cartString = JSON.stringify(updatedCart);
-          localStorage.setItem('cart', cartString);
-        }
+        const db = await openCartDB();
+        const tx = db.transaction(STORE_NAME, 'readwrite');
+        const store = tx.objectStore(STORE_NAME);
+        await store.delete(productId);
+        const allProducts = await store.getAll();
+        set({ cart: allProducts });
       } catch (error) {
-        console.error('Error storing updated cart:', error);
+        console.error('Error removing product from IndexedDB:', error);
       }
-
-      return {
-        cart: updatedCart,
-      };
-    });
+    })();
   },
-  incrementQuantity: (productId) => {
-    set((state) => {
-      const updatedCart = state.cart.map((item) =>
-        item.id === productId
-          ? {
-            ...item,
-            qtd: (item.qtd || 0) + 1,
-            cartPrice: Number(item.price) * ((item.qtd || 0) + 1),
-          }
-          : item
-      );
+  incrementQuantity: (productId: number) => {
+    (async () => {
       try {
-        if (typeof window !== 'undefined') {
-          const cartString = JSON.stringify(updatedCart);
-          if (cartString.length >= 5 * 1024 * 1024) {
-            console.error('Storage quota exceeded. Cannot update cart.');
-            return state;
-          }
-
-          localStorage.setItem('cart', cartString);
+        const db = await openCartDB();
+        const tx = db.transaction(STORE_NAME, 'readwrite');
+        const store = tx.objectStore(STORE_NAME);
+        
+        const product = await store.get(productId);
+        if (product) {
+          product.qtd = (product.qtd || 0) + 1;
+          product.cartPrice = Number(product.price) * (product.qtd);
+          await store.put(product);
         }
+        
+        const allProducts = await store.getAll();
+        set({ cart: allProducts });
       } catch (error) {
-        console.error('Error storing updated cart:', error);
+        console.error('Error incrementing product quantity in IndexedDB:', error);
       }
-
-      return { cart: updatedCart };
-    });
+    })();
   },
-  decrementQuantity: (productId) => {
-    set((state) => {
-      const updatedCart = state.cart.map((item) =>
-        item.id === productId
-          ? {
-            ...item,
-            qtd: (item.qtd || 0) > 0 ? (item.qtd || 0) - 1 : 0,
-            cartPrice: Number(item.price) * ((item.qtd || 0) > 0 ? (item.qtd || 0) - 1 : 0),
-          }
-          : item
-      );
-
+  decrementQuantity: (productId: number) => {
+    (async () => {
       try {
-        if (typeof window !== 'undefined') {
-          const cartToStore = updatedCart.map(item => ({
-            id: item.id,
-            qtd: item.qtd,
-          }));
-
-          const cartString = JSON.stringify(cartToStore);
-          if (cartString.length >= 5 * 1024 * 1024) {
-            console.error('Storage quota exceeded. Cannot update cart.');
-            return state;
-          }
-
-          localStorage.setItem('cart', cartString);
+        const db = await openCartDB();
+        const tx = db.transaction(STORE_NAME, 'readwrite');
+        const store = tx.objectStore(STORE_NAME);
+        
+        const product = await store.get(productId);
+        if (product && product.qtd > 0) {
+          product.qtd = product.qtd - 1;
+          product.cartPrice = Number(product.price) * (product.qtd);
+          await store.put(product);
         }
+        
+        const allProducts = await store.getAll();
+        set({ cart: allProducts });
       } catch (error) {
-        console.error('Error storing updated cart:', error);
+        console.error('Error decrementing product quantity in IndexedDB:', error);
       }
-
-      return { cart: updatedCart };
-    });
+    })();
   },
   calculatePrice: () => {
     set((state) => {
       const reducePrice = state.cart.reduce((acumulador: number, valorAtual: ProductData) => {
-        const price = typeof valorAtual.cartPrice === 'string'
-          ? parseFloat(valorAtual.cartPrice)
-          : typeof valorAtual.cartPrice === 'number'
+        const price =
+          typeof valorAtual.cartPrice === 'string'
+            ? parseFloat(valorAtual.cartPrice)
+            : typeof valorAtual.cartPrice === 'number'
             ? valorAtual.cartPrice
             : 0;
         return acumulador + price;
       }, 0);
 
       return { fullPrice: reducePrice };
-    })
-  }
-
+    });
+  },
 }));
 
 export default useCartStore;

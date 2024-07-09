@@ -44,7 +44,13 @@ const useFavoritesProducts = (): UseFavoritesProducts => {
             });
 
             const data = await response.json();
+            
             action(String(product_id));
+            if (data.message == 'Successfully favorited product') {
+                toast('Favoritado com sucesso!');
+            } else {
+                toast('Removido dos favoritos com sucesso!');
+            }
         } catch (error) {
             toast('Ocorreu um erro');
             console.error('Error fetching products:', error);

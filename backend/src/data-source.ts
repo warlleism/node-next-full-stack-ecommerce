@@ -5,7 +5,6 @@ import { User } from './entities/User'
 import { Product } from './entities/Product'
 import { Favorite } from './entities/Favorite'
 import { Sale } from './entities/Sale'
-import { Cart } from './entities/Cart'
 
 const port = process.env.DB_PORT as number | undefined
 
@@ -16,7 +15,7 @@ export const AppDataSource = new DataSource({
     username: process.env.DB_USER,
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
-    entities: [User, Product, Favorite, Sale, Cart],
+    entities: [User, Product, Favorite, Sale],
     synchronize: true,
     migrations: [`${__dirname}/**/migrations/*.{ts,js}`]
 })

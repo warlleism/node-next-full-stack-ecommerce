@@ -7,24 +7,22 @@ import useUserStore from '@/app/stores/userStorage';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import './style.scss';
+import { useAddProductInCart } from '@/app/utils/cartUtil';
 
 export function Button({ data }: { data: ProductData }) {
 
-    const route = useRouter();
+    const router = useRouter();
     const { user } = useUserStore()
-    const { id, price } = data;
-    const { cart, addProductToCart, showCart } = useCartStore();
+    const { id } = data;
+    const { cart } = useCartStore();
     const isInCart = cart.some(item => item.id === id && item.userId === user?.id);
 
-    const handleClick = () => {
-        isInCart ? showCart() : user ?
-            addProductToCart({ ...data, cartPrice: price, userId: user.id, qtd: 1 }) :
-            route.push('/pages/auth/login');
-    };
+    const addProductInCart = useAddProductInCart(router);
+
 
     return (
         <button
-            onClick={handleClick}
+            onClick={() => addProductInCart(data)}
             key={id}
             className="product-cart">
             <div>{isInCart ?
