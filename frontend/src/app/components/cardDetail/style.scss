@@ -1,15 +1,23 @@
-.container-cards-component {
-    gap: 20px;
+.container-cards-component-detail {
+    gap: 1px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 30px 30px 0 30px;
+    background-color: rgba(29, 29, 29, 0.034);
 
-    .product-card-card-component {
+    @media (max-width: 904px) {
+        justify-content: center;
+    }
+
+    .product-card-card-component-detail {
         gap: 10px;
-        width: 300px;
+        width: 23%;
         height: 410px;
         display: flex;
         padding: 10px;
+        margin-bottom: 20px;
         position: relative;
         border-radius: 5px;
         flex-direction: column;
@@ -17,7 +25,11 @@
         background-color: rgb(240, 240, 240);
         border: solid 1px rgba(0, 0, 0, 0.089);
 
-        .container-sale-number-card-component {
+        @media (max-width: 904px) {
+            width: 95%;
+        }
+
+        .container-sale-number-card-component-detail {
             top: 10px;
             left: 10px;
             width: 30px;
@@ -34,7 +46,7 @@
             background-color: #4b0066;
         }
 
-        .card-image-container-card-component {
+        .card-image-container-card-component-detail {
             width: 100%;
             height: 200px;
             display: flex;
@@ -42,14 +54,14 @@
             align-items: center;
             justify-content: center;
 
-            .card-icon-favorite-card-component {
+            .card-icon-favorite-card-component-detail {
                 position: absolute;
                 top: 0px;
                 right: 10px;
                 cursor: pointer;
             }
 
-            .image-card-component {
+            .image-card-component-detail {
                 cursor: pointer;
                 margin: 0 auto;
                 object-fit: contain;
@@ -58,7 +70,7 @@
             }
         }
 
-        .card-category-container-card-component {
+        .card-category-container-card-component-detail {
             font-size: .8rem;
             font-weight: 600;
             color: rgb(97, 97, 97);
@@ -68,7 +80,7 @@
             }
         }
 
-        .card-name-container-card-component {
+        .card-name-container-card-component-detail {
             font-size: 1.3rem;
             font-weight: 800;
             color: rgba(97, 97, 97, 0.753);
@@ -79,7 +91,7 @@
         }
 
 
-        .card-description-container-card-component {
+        .card-description-container-card-component-detail {
             font-size: .6rem;
             font-weight: 600;
             color: rgba(97, 97, 97, 0.644);
@@ -89,9 +101,9 @@
             }
         }
 
-        .card-price-container-card-component {
+        .card-price-container-card-component-detail {
 
-            .card-price-container-number-card-component {
+            .card-price-container-number-card-component-detail {
                 font-size: 1.1rem;
                 font-weight: 700;
                 color: rgb(97, 97, 97);
@@ -104,14 +116,14 @@
                 }
             }
 
-            .card-pix-container-number-card-component {
+            .card-pix-container-number-card-component-detail {
                 font-size: .8rem;
                 font-weight: 300;
                 color: rgb(97, 97, 97);
             }
         }
 
-        .card-rate-container-card-component {
+        .card-rate-container-card-component-detail {
             display: flex;
             align-items: center;
             font-size: .8rem;
@@ -122,7 +134,7 @@
                 font-size: .6rem;
             }
 
-            .start-home-icon-card-component {
+            .start-home-icon-card-component-detail {
                 color: #ffca00;
 
                 @media (max-width: 1407px) {

@@ -1,11 +1,11 @@
 'use client'
 
+import './style.scss'
+import AddIcon from '@mui/icons-material/Add';
 import useUserStore from "@/app/stores/userStorage";
+import useNewProductStore from "@/app/stores/createStorage";
 import { RenderProducts } from "./components/render-products/products"
 import { RenderSaleProducts } from "./components/render-sale-products/sale-products"
-import './style.scss'
-import useNewProductStore from "@/app/stores/createStorage";
-import AddIcon from '@mui/icons-material/Add';
 
 export default function HomePage() {
 

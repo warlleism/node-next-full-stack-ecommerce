@@ -12,7 +12,7 @@ const useGetCarouselOurProducts = () => {
     const { listProducts, listAllProducts } = useProductStore()
 
     const fetchProducts = useMemo(() => async () => {
-        const token = getValidToken();
+        const token = await getValidToken();
         const headers: HeadersInit = token ? { 'Authorization': `Bearer ${token}` } : {};
         const response = await fetch(`http://localhost:3001/product/ourProducts?page=${pages}&limit=${qtdItens}`, { headers });
         const data = await response.json();

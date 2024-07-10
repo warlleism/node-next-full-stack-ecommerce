@@ -17,12 +17,8 @@ import LoadingComponent from '@/app/components/loadingComponent/loading';
 export default function DetailOneProduct() {
 
     const router = useRouter();
-    const { favorite, product, initializeOneProduct } = useProductStore();
+    const { favorite, product } = useProductStore();
     const { addProductInCart, redirectUserFavorite } = useAddProductInCart(router);
-
-    useEffect(() => {
-        initializeOneProduct();
-    }, []);
 
     const generateStars = (rate: number) => {
         const starts = [1, 2, 3].map((e, index) => < StarIcon key={index} className='start-detail-one' />)
@@ -36,7 +32,6 @@ export default function DetailOneProduct() {
     if (!product) {
         return null;
     }
-
 
     return (
         <>
@@ -59,7 +54,7 @@ export default function DetailOneProduct() {
                             </div>
                             <div className="container-detail-buy">
                                 <div>
-                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
                                         <div className='container-detail-one-category'>{product?.category}</div>
                                         {generateStars(product?.rate)}
                                     </div>

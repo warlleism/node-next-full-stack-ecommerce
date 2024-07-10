@@ -37,7 +37,7 @@ export function Header() {
     function handleClick(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
         try {
-            if (inputRef.current?.value.length) {
+            if (inputRef.current) {
                 changeSearch(inputRef.current?.value)
                 setProducts([])
                 localStorage.setItem('detailAll', inputRef.current?.value)
@@ -105,7 +105,7 @@ export function Header() {
                             ))}
                             <div
                                 onClick={(event: React.MouseEvent<HTMLDivElement>) => handleClick(event as unknown as React.FormEvent<HTMLFormElement>)}
-                                style={{ fontWeight: 700, color: '#000000b0', cursor: 'pointer' }}>
+                                style={{ boxSizing: "border-box", paddingLeft: 13, fontWeight: 700, color: '#ffb300', cursor: 'pointer' }}>
                                 Ver Todos...
                             </div>
                         </div>

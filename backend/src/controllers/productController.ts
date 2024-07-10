@@ -26,10 +26,7 @@ export class ProductController {
         const filename = `${name}.png`;
         let imagePath;
 
-
         imagePath = await saveImageToFile(image, filename);
-
-        console.log(imagePath)
 
 
         const newUser = productRepository.create({
@@ -40,10 +37,8 @@ export class ProductController {
             rate,
             category
         });
-
         await productRepository.save(newUser);
-        const { ...user } = newUser;
-        return res.status(200).json({ message: "Product registered successfully", data: user });
+        return res.status(200).json({ message: "Product registered successfully", data: newUser });
     }
 
     async getAll(req: Request, res: Response) {

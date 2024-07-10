@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { getValidToken } from '../utils/validToken';
 import useProductStore from '../stores/productStorage';
+import { boolean } from 'zod';
 
 const useProductSearch = () => {
     const [error, setError] = useState('');
@@ -82,7 +83,7 @@ const useProductSearch = () => {
         if (inputRef.current) {
             const inputValue = inputRef.current.value;
 
-            if (inputValue.length === 0) {
+            if (inputValue.length === 1) {
                 setProducts([]);
                 setError('');
                 return;

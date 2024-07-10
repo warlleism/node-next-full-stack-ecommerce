@@ -10,15 +10,22 @@ interface ProductState {
   detailProduct: (product: ProductData) => void;
   addToFavorite: (number: string) => void;
   removeFromFavorite: (number: string) => void;
-  initializeOneProduct: () => void;
   listAllProducts: (items: ProductData[]) => void
   updateAllProducts: (items: ProductData) => void
 }
 
+//inicializar os favoritos
+const storedFavorites = localStorage.getItem('favorite');
+const initialFavorites = storedFavorites ? JSON.parse(storedFavorites) : [];
+
+//inicializar o produto
+const storedOneProduct = localStorage.getItem('product');
+const initialOneProduct = storedOneProduct ? JSON.parse(storedOneProduct) : null;
+
 const useProductStore = create<ProductState>((set) => ({
   listProducts: [],
-  favorite: [],
-  product: null,
+  favorite: initialFavorites,
+  product: initialOneProduct,
   listAllProducts: (items: ProductData[]) => {
     set(() => ({
       listProducts: items
@@ -31,29 +38,21 @@ const useProductStore = create<ProductState>((set) => ({
       return { listProducts: newItems };
     });
   },
-  initializeOneProduct: () => {
-    if (typeof window !== 'undefined') {
-      const storedProduct = localStorage.getItem('product');
-      if (storedProduct) {
-        set({ product: JSON.parse(storedProduct) });
-      }
-    }
-  },
   detailProduct: (product) => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('product', JSON.stringify(product));
     }
-    set((state) => ({
+    set(() => ({
       product: product
     }));
   },
   addToFavorite: (numberToAdd) => {
     const numberToAddAsNumber = parseInt(numberToAdd, 10);
-    if (!isNaN(numberToAddAsNumber)) {
-      set((state) => ({
-        favorite: [...state.favorite, numberToAddAsNumber],
-      }));
-    }
+    set((state) => {
+      const updatedFavorites = [...state.favorite, numberToAddAsNumber];
+      localStorage.setItem('favorite', JSON.stringify(updatedFavorites));
+      return { favorite: updatedFavorites };
+    });
   },
   removeFromFavorite: (numberToRemove) => {
     const numberToRemoveAsNumber = parseInt(numberToRemove, 10);

@@ -7,7 +7,7 @@ function Skeletons() {
                 sx={{ borderRadius: 1 }}
                 variant="rectangular"
                 width={270}
-                height={180} />
+                height={280} />
             <Skeleton
                 variant="rectangular"
                 width={70}

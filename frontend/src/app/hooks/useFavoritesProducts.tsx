@@ -19,7 +19,7 @@ const useFavoritesProducts = (): UseFavoritesProducts => {
 
     const fetchFavorite = async ({ product_id }: { product_id: string }): Promise<void> => {
 
-        const token = getValidToken();
+        const token = await getValidToken();
 
         if (isFetching) {
             return;
@@ -47,10 +47,11 @@ const useFavoritesProducts = (): UseFavoritesProducts => {
             const data = await response.json();
 
             action(String(product_id));
+
             if (data.message == 'Successfully favorited product') {
-                toast(<div style={{ display: 'flex', alignItems: 'center', gap: 10 }}><FavoriteIcon style={{ color: 'red' }} />Favoritado com sucesso.</div>);
+                toast(<div style={{ display: 'flex', alignItems: 'center', gap: 10 }}><FavoriteIcon style={{ color: 'red' }} />Produto favoritado.</div>);
             } else {
-                toast(<div style={{ display: 'flex', alignItems: 'center', gap: 10 }}><HeartBrokenIcon style={{ color: 'red' }} />Desfavoritado com sucesso.</div>);
+                toast(<div style={{ display: 'flex', alignItems: 'center', gap: 10 }}><HeartBrokenIcon style={{ color: 'red' }} />Produto desfavoritado.</div>);
             }
         } catch (error) {
             toast('Ocorreu um erro');

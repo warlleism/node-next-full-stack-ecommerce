@@ -36,14 +36,14 @@ const useGetDetailAllProducts = () => {
             baseUrl = baseUrls.products + '/getAllProducts'
         }
 
-        const urlParams = `?page=${page}&limit=${qtdItens}`;
+        const urlParams = `?page=1&limit=${qtdItens}`;
 
         return baseUrl + urlParams;
     }, [page, qtdItens, search, urlLocal]);
 
 
     const fetchProducts = async () => {
-        
+
         const token = await getValidToken();
         const headers = {
             'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ const useGetDetailAllProducts = () => {
 
         try {
             const response = await fetch(filteredUrl, isToken);
-            
+
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }

@@ -51,7 +51,7 @@ export default function FormDrawerComponent() {
 
         const method = values.id ? "PUT" : "POST"
         const url = values.id ? 'product/update' : "product/create"
-        const token = getValidToken();
+        const token = await getValidToken();
 
         try {
             const response = await fetch(`http://localhost:3001/${url}`, {

@@ -16,14 +16,19 @@ export default function CardDetail({ products }: any) {
     const { detailProduct } = useProductStore();
 
     return (
-        <div className='container-cards-component'>
+        <div className='container-cards-component-detail'
+            style={{
+                gap: products.length <= 3 ? 10 : 0,
+                justifyContent: products.length <= 3 ? 'flex-start' : 'space-between'
+            }}
+        >
             {
                 products?.map((item: ProductData) => (
                     <div
                         key={item.id}
-                        className="product-card-card-component">
-                        {item.sale && <div className='container-sale-number-card-component'>{item?.sale}%</div>}
-                        <div className="card-image-container-card-component">
+                        className="product-card-card-component-detail">
+                        {item.sale && <div className='container-sale-number-card-component-detail'>{item?.sale}%</div>}
+                        <div className="card-image-container-card-component-detail">
                             <FavoriteComponent id={item.id} />
                             <ButtonEditProduct item={item} sale={item?.sale} />
                             <Image
@@ -31,7 +36,7 @@ export default function CardDetail({ products }: any) {
                                     detailProduct(item)
                                     route.push('/pages/detail/detailOne')
                                 }}
-                                className="image-card-component"
+                                className="image-card-component-detail"
                                 style={{ objectFit: "contain" }}
                                 loading="eager"
                                 alt={item.name}
@@ -41,15 +46,15 @@ export default function CardDetail({ products }: any) {
                             />
                         </div>
                         <div>
-                            <div className="card-category-container-card-component">{item.category}</div>
-                            <div className="card-name-container-card-component">{item.name}</div>
+                            <div className="card-category-container-card-component-detail">{item.category}</div>
+                            <div className="card-name-container-card-component-detail">{item.name}</div>
                         </div>
                         <Tooltip title={item.description}>
-                            <div className="card-description-container-card-component"> {item.description.substring(0, 80)}...</div>
+                            <div className="card-description-container-card-component-detail"> {item.description.substring(0, 80)}...</div>
                         </Tooltip>
-                        <div className="card-price-container-card-component">
+                        <div className="card-price-container-card-component-detail">
                             {item.defaultPrice &&
-                                <div className='card-price-container-number-card-component'>
+                                <div className='card-price-container-number-card-component-detail'>
                                     <div style={{ textDecoration: 'line-through' }}>
                                         R${item.defaultPrice}
                                     </div>
@@ -59,14 +64,14 @@ export default function CardDetail({ products }: any) {
                                     </div>
                                 </div>
                             }
-                            {!item.defaultPrice && <div className='card-price-container-number-card-component'>R${item.price}</div>}
-                            <div className='card-pix-container-number-card-component'>À vista ou pix</div>
+                            {!item.defaultPrice && <div className='card-price-container-number-card-component-detail'>R${item.price}</div>}
+                            <div className='card-pix-container-number-card-component-detail'>À vista ou pix</div>
                         </div>
                         <Tooltip title={`${item.rate} avaliações`}>
-                            <div className="card-rate-container-card-component">
-                                <StarIcon className='start-home-icon-card-component' />
-                                <StarIcon className='start-home-icon-card-component' />
-                                <StarHalfIcon className='start-home-icon-card-component' />
+                            <div className="card-rate-container-card-component-detail">
+                                <StarIcon className='start-home-icon-card-component-detail' />
+                                <StarIcon className='start-home-icon-card-component-detail' />
+                                <StarHalfIcon className='start-home-icon-card-component-detail' />
                                 ({item.rate} avaliações)
                             </div>
                         </Tooltip>

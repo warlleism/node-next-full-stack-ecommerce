@@ -9,7 +9,6 @@ import './style.scss';
 export function RenderSaleProducts() {
 
     const { products } = useGetCarouselInSaleProducts();
-
    
     return (
         <div className='main-sale-our-products-container'>
