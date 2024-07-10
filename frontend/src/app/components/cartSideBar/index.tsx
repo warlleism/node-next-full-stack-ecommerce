@@ -3,7 +3,7 @@
 import './style.scss';
 import Image from 'next/image';
 import { useEffect } from 'react';
-import { Drawer } from "@mui/material";
+import { Box, Drawer } from "@mui/material";
 import { useRouter } from 'next/navigation';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
@@ -52,13 +52,17 @@ export default function CartSideBar() {
                     </div>
                 </div>
                 <TransitionGroup className='container-cart-list-itens'>
-                    {cart.map((item) => item.userId === user?.id && (
+                    {cart.map((item, index) => item.userId === user?.id && (
                         <CSSTransition
                             key={item.id}
                             classNames="item"
                             timeout={500}>
                             <div
-                                className='container-itens-cart' key={item.id}>
+                                className='container-itens-cart'
+                                key={item.id}
+                                style={{ borderBottom: cart.length === index + 1 ? 'none' : '1px solid #ddd' }}
+                            >
+
                                 <Image
                                     className="image-cart"
                                     style={{ objectFit: "contain" }}
@@ -97,7 +101,6 @@ export default function CartSideBar() {
                         </CSSTransition>
                     ))}
                 </TransitionGroup>
-
                 <div className='container-finalize-purchase'>
                     <div className='container-cart-total'>Valor Total: <div style={{ fontWeight: 700 }}>R${fullPrice}</div></div>
                     <div className='container-cart-finalize'>

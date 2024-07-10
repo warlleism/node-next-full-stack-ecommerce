@@ -17,7 +17,7 @@ export function Button({ data }: { data: ProductData }) {
     const { cart } = useCartStore();
     const isInCart = cart.some(item => item.id === id && item.userId === user?.id);
 
-    const addProductInCart = useAddProductInCart(router);
+    const { addProductInCart } = useAddProductInCart(router);
 
 
     return (
