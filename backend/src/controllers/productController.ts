@@ -112,23 +112,34 @@ export class ProductController {
             if (authorization) {
                 const token = authorization.split(' ')[1];
                 if (token) {
-                    const { id } = jwt.verify(token, process.env.JWT_PASS ?? '') as JwtPayload;
-                    const favoriteExists = await favoriteRepository.findBy({ user_id: id });
-                    const productMap = favoriteExists.map(e => e.product_id);
+                    try {
+                        const { id } = jwt.verify(token, process.env.JWT_PASS ?? '') as JwtPayload;
+                        const favoriteExists = await favoriteRepository.findBy({ user_id: id });
+                        const productMap = favoriteExists.map(e => e.product_id);
 
-                    const { allProducts, total } = await fetchProducts();
+                        const { allProducts, total } = await fetchProducts();
 
-                    const sales = await saleRepository.find();
-                    const saleIds = new Set(sales.map(sale => String(sale.product_id)));
-                    const filteredProducts = allProducts.filter(product => !saleIds.has(String(product.id)));
+                        const sales = await saleRepository.find();
+                        const saleIds = new Set(sales.map(sale => String(sale.product_id)));
+                        const filteredProducts = allProducts.filter(product => !saleIds.has(String(product.id)));
 
-                    return res.status(200).json({
-                        message: "All products with images!",
-                        data: filteredProducts,
-                        favorites: productMap,
-                        currentPage: page,
-                        totalPages: Math.ceil(total / limit),
-                    });
+                        return res.status(200).json({
+                            message: "All products with images!",
+                            data: filteredProducts,
+                            favorites: productMap,
+                            currentPage: page,
+                            totalPages: Math.ceil(total / limit),
+                        });
+
+                    } catch (error) {
+                        const { allProducts, total } = await fetchProducts();
+                        return res.status(200).json({
+                            message: "All products with images!",
+                            data: allProducts,
+                            currentPage: page,
+                            totalPages: Math.ceil(total / limit),
+                        });
+                    }
                 }
             } else {
                 const { allProducts, total } = await fetchProducts();
@@ -184,12 +195,15 @@ export class ProductController {
         const totalPages = Math.ceil(itensWithSale.length / limit);
 
         let ids: number[] | null = authorization ? [] : null;
+
         if (authorization) {
             const token = authorization.split(' ')[1];
-            const { id } = jwt.verify(token, process.env.JWT_PASS ?? '') as JwtPayload;
-            const favoriteExists = await favoriteRepository.findBy({ user_id: id });
-            const productMap = favoriteExists.map(e => e.product_id);
-            ids = productMap;
+            if (token) {
+                const { id } = jwt.verify(token, process.env.JWT_PASS ?? '') as JwtPayload;
+                const favoriteExists = await favoriteRepository.findBy({ user_id: id });
+                const productMap = favoriteExists.map(e => e.product_id);
+                ids = productMap;
+            }
         }
 
         return res.status(200).json({

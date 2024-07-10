@@ -24,7 +24,7 @@ export function Header() {
     const { detailProduct } = useProductStore();
     const [animate, setAnimate] = useState(false);
     const { changeSearch } = useFilterProductStorage()
-    const { error, products, inputRef, handleInputChange, inputRefContainer } = useProductSearch()
+    const { error, products, setProducts, inputRef, handleInputChange, inputRefContainer } = useProductSearch()
 
     useEffect(() => {
         if (cart.length > 0) {
@@ -37,11 +37,12 @@ export function Header() {
     function handleClick(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
         try {
-            if (inputRef.current) {
+            if (inputRef.current?.value.length) {
                 changeSearch(inputRef.current?.value)
+                setProducts([])
                 localStorage.setItem('detailAll', inputRef.current?.value)
+                route.push('/pages/detail/detailAll')
             }
-            route.push('/pages/detail/detailAll')
         } catch (error) {
             console.log(error)
         }
@@ -51,6 +52,7 @@ export function Header() {
         const qtdItem = cart.filter((items) => items.userId == user?.id).length
         return qtdItem
     }
+
 
     return (
         <div className='main-container-header'>
@@ -77,7 +79,7 @@ export function Header() {
                     />
                 </form>
                 {
-                    products.length !== 0 ?
+                    products?.length !== 0 ?
                         <div className='container-search-list' ref={inputRefContainer}>
                             {products?.map((item: ProductData, index) => (
                                 <Link

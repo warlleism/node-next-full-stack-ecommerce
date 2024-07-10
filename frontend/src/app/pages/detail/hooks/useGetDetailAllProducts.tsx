@@ -8,7 +8,7 @@ import { getValidToken } from '@/app/utils/validToken';
 const useGetDetailAllProducts = () => {
 
     const [page, setPage] = useState(1);
-    const [qtdItens, setQtdItens] = useState(12);
+    const [qtdItens, setQtdItens] = useState(5);
     const { addToFavorite } = useProductStore();
     const { search } = useFilterProductStorage();
     const [urlLocal, setUrlLocal] = useState<string | null>(null);
@@ -43,19 +43,22 @@ const useGetDetailAllProducts = () => {
 
 
     const fetchProducts = async () => {
-        const token = getValidToken();
+        
+        const token = await getValidToken();
+        const headers = {
+            'Content-Type': 'application/json',
+            ...(token && { 'Authorization': `Bearer ${token}` }),
+        };
 
+        const isToken = {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({ search }),
+        };
 
         try {
-            const response = await fetch(filteredUrl, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ search }),
-            });
-
+            const response = await fetch(filteredUrl, isToken);
+            
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }

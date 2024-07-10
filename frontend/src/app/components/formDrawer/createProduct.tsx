@@ -88,7 +88,7 @@ export default function FormDrawerComponent() {
                 <ControllerTextField type="text" label="Titulo:" register={register('name')} errors={errors.name} />
                 <ControllerTextField type="number" label="Preço:" register={register('price')} errors={errors.price} />
                 <ControllerTextField type="text" label="Categoria:" register={register('category')} errors={errors.category} />
-                {newProduct?.rate && <ControllerTextField type="number" label="Avaliação:" register={register('rate')} errors={errors.rate} />}
+                {newProduct?.rate && <ControllerTextField disabled={true} type="number" label="Avaliação:" register={register('rate')} errors={errors.rate} />}
                 <ControllerTextField type="text" label="Descrição:" register={register('description')} errors={errors.description} />
                 <ControllerFileField nameFile={newProduct?.name} name="image" control={control} initialImageSrc={newProduct?.image} label="Imagem" register={register('image')} errors={errors.image} />
                 <button className='form-drawer-button-submit'>{!newProduct?.id ? "Cadastrar" : "Salvar"}</button>

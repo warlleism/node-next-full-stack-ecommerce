@@ -5,7 +5,8 @@ import { toast } from 'react-toastify';
 import useUserStore from '../stores/userStorage';
 import useProductStore from '../stores/productStorage';
 import { getValidToken } from '../utils/validToken';
-
+import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 interface UseFavoritesProducts {
     fetchFavorite: ({ product_id }: { product_id: any }) => void;
 }
@@ -44,12 +45,12 @@ const useFavoritesProducts = (): UseFavoritesProducts => {
             });
 
             const data = await response.json();
-            
+
             action(String(product_id));
             if (data.message == 'Successfully favorited product') {
-                toast('Favoritado com sucesso!');
+                toast(<div style={{ display: 'flex', alignItems: 'center', gap: 10 }}><FavoriteIcon style={{ color: 'red' }} />Favoritado com sucesso.</div>);
             } else {
-                toast('Removido dos favoritos com sucesso!');
+                toast(<div style={{ display: 'flex', alignItems: 'center', gap: 10 }}><HeartBrokenIcon style={{ color: 'red' }} />Desfavoritado com sucesso.</div>);
             }
         } catch (error) {
             toast('Ocorreu um erro');

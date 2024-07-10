@@ -1,37 +1,47 @@
 .main-container-detail-all-container {
-  width: 100%;
+  width: 70%;
   display: flex;
-  margin-top: 90px;
+  padding: 20px;
+  border-radius: 5px;
   flex-direction: column;
+  box-sizing: border-box;
+  margin: 90px auto 0 auto;
+  background-color: #f6f6f6;
+
+  @media (max-width: 1410px) {
+    width: 95%;
+  }
+
+  @media (max-width: 1031px) {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .container-controls {
+    gap: 10px;
+    width: 98%;
+    margin: 0 auto;
+    display: flex;
+    margin-bottom: 30px;
+    align-items: center;
+
+    .items-per-page {
+      width: 170px;
+    }
+  }
+
+  .container-cards-detail-all-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
 
   .list-filter-products-container {
     width: 100%;
     display: flex;
     justify-content: space-between;
-
-    .container-cards-detail-all-container {
-      width: 78%;
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .container-filter-container {
-      width: 22%;
-      display: flex;
-      position: relative;
-      justify-content: center;
-
-      .filter-detail-all-container {
-        width: 20vw;
-        height: 60vh;
-        position: fixed;
-        border-radius: 5px;
-        background-color: #f2f2f2;
-
-      }
-    }
 
   }
 
@@ -43,6 +53,25 @@
     list-style: none;
     align-items: center;
     justify-content: center;
+
+    li {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      cursor: pointer;
+      border-radius: 5px;
+      align-items: center;
+      flex-direction: column;
+      box-sizing: border-box;
+      justify-content: center;
+      transition: .5s ease-in-out;
+      background-color: rgb(240, 240, 240);
+      border: solid 1px rgba(0, 0, 0, 0.089);
+    }
+
+    li:hover {
+      background-color: rgb(209, 209, 209);
+    }
   }
 
 }

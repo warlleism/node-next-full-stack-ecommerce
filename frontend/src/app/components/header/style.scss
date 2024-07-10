@@ -78,6 +78,7 @@
             flex-direction: column;
             transition: .2s ease-in-out;
             gap: 20px;
+            z-index: 9999999;
             box-sizing: border-box;
             padding: 10px 10px;
             background-color: #f7f7f7;

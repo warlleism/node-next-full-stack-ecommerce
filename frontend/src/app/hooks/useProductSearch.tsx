@@ -38,25 +38,29 @@ const useProductSearch = () => {
 
     const fetchProducts = useCallback(async (inputValue: string) => {
 
-        const token = getValidToken();
+        const token = await getValidToken();
+        const headers = {
+            'Content-Type': 'application/json',
+            ...(token && { 'Authorization': `Bearer ${token}` }),
+        };
+
+        const isToken = {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({ search: inputValue }),
+        };
 
         if (inputValue.trim()) {
             const url = `http://localhost:3001/product/search?page=1&limit=4`;
             try {
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ search: inputValue }),
-                });
+                const response = await fetch(url, isToken);
 
                 if (response.status === 400) {
                     setProducts([]);
                     setError('Produto não encontrado!');
                     return;
                 }
+
                 const data = await response.json();
 
                 if (data?.favorites) {
@@ -92,6 +96,7 @@ const useProductSearch = () => {
 
     return {
         products,
+        setProducts,
         inputRef,
         error,
         inputRefContainer,

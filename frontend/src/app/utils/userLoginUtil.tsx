@@ -30,11 +30,7 @@ export const handleFormSubmit = async ({ data, event, setLoading, setUser }: Sub
             return;
         }
 
-        const expiresIn = 24 * 60 * 60 * 1000; 
-        const expirationDate = new Date().getTime() + expiresIn;
-
         localStorage.setItem('token', result.token);
-        localStorage.setItem('tokenExpiration', expirationDate.toString());
         setUser(result.user);
 
         await signIn('credentials', {

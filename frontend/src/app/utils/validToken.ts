@@ -1,19 +1,23 @@
-export const getValidToken = () => {
+export const getValidToken = async () => {
     const token = localStorage.getItem('token');
-    const tokenExpiration = localStorage.getItem('tokenExpiration');
 
-    if (!token || !tokenExpiration) {
+    if (!token) {
         return null;
     }
 
-    const expirationDate = parseInt(tokenExpiration, 10);
-    const currentDate = new Date().getTime();
+    try {
+        const response = await fetch('http://localhost:3001/valid/token', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+        });
 
-    if (currentDate > expirationDate) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('tokenExpiration');
+        const data = await response.json();
+        return data.token ? data.token : null;
+    } catch (error) {
+        console.error('Erro ao validar o token:', error);
         return null;
     }
-
-    return token;
 };

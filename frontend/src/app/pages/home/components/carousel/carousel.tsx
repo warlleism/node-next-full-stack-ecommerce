@@ -18,6 +18,7 @@ import ButtonEditProduct from '@/app/components/buttonEdit/edit';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import useFilterProductStorage from '@/app/stores/filterProductStorage';
+import Card from '../card/card';
 
 export function CarouselComponent({ products, scroll }: any) {
 
@@ -62,54 +63,7 @@ export function CarouselComponent({ products, scroll }: any) {
                                     key={item.id}
                                     className="product-card">
                                     {item.sale && <div className='container-sale-number'>{item?.sale}%</div>}
-                                    <FavoriteComponent id={item.id} />
-                                    <ButtonEditProduct item={item} sale={item?.sale} />
-                                    <div className="card-image-container">
-                                        <Image
-                                            onClick={() => {
-                                                detailProduct(item)
-                                                route.push('/pages/detail/detailOne')
-                                            }}
-                                            className="image"
-                                            style={{ objectFit: "contain" }}
-                                            loading="eager"
-                                            alt={item.name}
-                                            src={`data:image/jpeg;base64,${item.image}`}
-                                            width={500}
-                                            height={500}
-                                        />
-                                    </div>
-                                    <div>
-                                        <div className="card-category-container">{item.category}</div>
-                                        <div className="card-name-container">{item.name}</div>
-                                    </div>
-                                    <Tooltip title={item.description}>
-                                        <div className="card-description-container"> {item.description.substring(0, 80)}...</div>
-                                    </Tooltip>
-                                    <div className="card-price-container">
-                                        {item.defaultPrice &&
-                                            <div className='card-price-container-number'>
-                                                <div style={{ textDecoration: 'line-through' }}>
-                                                    R${item.defaultPrice}
-                                                </div>
-                                                -
-                                                <div>
-                                                    R${item.price}
-                                                </div>
-                                            </div>
-                                        }
-                                        {!item.defaultPrice && <div className='card-price-container-number'>R${item.price}</div>}
-                                        <div className='card-pix-container-number'>À vista ou pix</div>
-                                    </div>
-                                    <Tooltip title={`${item.rate} avaliações`}>
-                                        <div className="card-rate-container">
-                                            <StarIcon className='start-home-icon' />
-                                            <StarIcon className='start-home-icon' />
-                                            <StarHalfIcon className='start-home-icon' />
-                                            ({item.rate} avaliações)
-                                        </div>
-                                    </Tooltip>
-                                    <Button data={item} />
+                                    <Card product={item} />
                                 </SwiperSlide>
                             ))
                             :
