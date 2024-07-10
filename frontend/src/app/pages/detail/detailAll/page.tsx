@@ -2,10 +2,9 @@
 
 import './style.scss';
 import { Header } from '../../../components/header';
-import CircularProgress from '@mui/material/CircularProgress';
 import useGetDetailAllProducts from '../hooks/useGetDetailAllProducts';
-import Card from '@/app/components/card/card';
-
+import LoadingComponent from '@/app/components/loadingComponent/loading';
+import CardDetail from '@/app/components/cardDetail/card';
 
 export default function DetailAllProduct() {
 
@@ -20,31 +19,25 @@ export default function DetailAllProduct() {
     return (
         <>
             <Header />
-            {products ? (
-                <div className='main-container-detail-all-container'>
-                    <div className='list-filter-products-container'>
-                        <div className='container-filter-container'>
-                            <div className='filter-detail-all-container'>
-                                filtro
+            {
+                products.length !== 0 ? (
+                    <div className='main-container-detail-all-container'>
+                        <div className='list-filter-products-container'>
+                            <div className='container-filter-container'>
+                                <div className='filter-detail-all-container'>
+                                    filtro
+                                </div>
+                            </div>
+                            <div className='container-cards-detail-all-container'>
+                                <CardDetail products={products} />
+                                <ul className='container-paginacao-detadetail-all-container'>{pagination()}</ul>
                             </div>
                         </div>
-                        <div className='container-cards-detail-all-container'>
-                            <Card products={products} />
-                            <ul className='container-paginacao-detadetail-all-container'>{pagination()}</ul>
-                        </div>
                     </div>
-                </div>
 
-            ) : (
-                <div className='container-detailAll-loading'>
-                    <CircularProgress
-                        variant="indeterminate"
-                        disableShrink
-                        sx={{ color: '#32004e', animationDuration: '550ms' }}
-                        size={120}
-                    />
-                </div>
-            )}
+                ) : (
+                    <LoadingComponent />
+                )}
 
         </>
     );
