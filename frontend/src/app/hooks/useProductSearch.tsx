@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { getValidToken } from '../utils/validToken';
 import useProductStore from '../stores/productStorage';
-import { boolean } from 'zod';
 
 const useProductSearch = () => {
     const [error, setError] = useState('');
