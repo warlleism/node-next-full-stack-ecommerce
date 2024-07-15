@@ -113,6 +113,18 @@ routes.get('/product/ourProducts', new ProductController().getOurProducts);
 
 /**
  * @swagger
+ * /product/ourProducts:
+ *   get:
+ *     summary: Get our products
+ *     tags: [Products]
+ *     responses:
+ *       200:
+ *         description: List of our products
+ */
+routes.get('/product/ourProducts?page=1&limit=4', new ProductController().getOurProducts);
+
+/**
+ * @swagger
  * /product/getAllProducts:
  *   post:
  *     summary: Get all products

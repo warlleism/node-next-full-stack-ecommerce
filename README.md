@@ -8,6 +8,7 @@ Este é um projeto de uma ecommerce fullstack!
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Instalação](#instalação)
 - [Uso](#uso)
+- [Requisitos](#uso)
 
 ## Visão Geral
 
@@ -87,6 +88,8 @@ Instruções para rodar o projeto em ambiente de desenvolvimento.
     ```
 
 O projeto backend estará disponível em `http://localhost:3001` (ou na porta configurada).
+
+## Requisitos
 
 ### Coleta de Requisitos do projeto
 
