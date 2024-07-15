@@ -69,7 +69,7 @@ routes.post('/user/login', new UserController().login);
  * /product/create:
  *   post:
  *     summary: Create a new product
- *     tags: [Product]
+ *     tags: [Products]
  *     security:
  *       - BearerAuth: []
  *     requestBody:
@@ -104,7 +104,7 @@ routes.post('/product/create', authMiddleware, new ProductController().create);
  * /product/ourProducts:
  *   get:
  *     summary: Get our products
- *     tags: [Product]
+ *     tags: [Products]
  *     responses:
  *       200:
  *         description: List of our products
@@ -116,7 +116,7 @@ routes.get('/product/ourProducts', new ProductController().getOurProducts);
  * /product/getAllProducts:
  *   post:
  *     summary: Get all products
- *     tags: [Product]
+ *     tags: [Products]
  *     responses:
  *       200:
  *         description: List of all products
@@ -128,7 +128,7 @@ routes.post('/product/getAllProducts', new ProductController().getAll);
  * /product/getAllProducts?page=1&limit=4:
  *   post:
  *     summary: Get all products
- *     tags: [Product]
+ *     tags: [Products]
  *     responses:
  *       200:
  *         description: List of all products
@@ -140,7 +140,7 @@ routes.post('/product/getAllProducts?page=1&limit=4', new ProductController().ge
  * /product/delete:
  *   delete:
  *     summary: Delete a product
- *     tags: [Product]
+ *     tags: [Products]
  *     security:
  *       - BearerAuth: []
  *     requestBody:
@@ -165,7 +165,7 @@ routes.delete('/product/delete', authMiddleware, new ProductController().delete)
  * /product/update:
  *   put:
  *     summary: Update a product
- *     tags: [Product]
+ *     tags: [Products]
  *     security:
  *       - BearerAuth: []
  *     requestBody:
@@ -202,7 +202,7 @@ routes.put('/product/update', authMiddleware, new ProductController().update);
  * /product/search:
  *   post:
  *     summary: Search for products
- *     tags: [Product]
+ *     tags: [Products]
  *     requestBody:
  *       required: true
  *       content:
@@ -224,7 +224,7 @@ routes.post('/product/search', new ProductController().getSearch);
  * /favorite/create:
  *   post:
  *     summary: Add a product to favorites
- *     tags: [Favorite]
+ *     tags: [Favorite products]
  *     security:
  *       - BearerAuth: []
  *     requestBody:
@@ -251,7 +251,7 @@ routes.post('/favorite/create', authMiddleware, new FavoriteController().create)
  * /favorite/delete:
  *   delete:
  *     summary: Remove a product from favorites
- *     tags: [Favorite]
+ *     tags: [Favorite products]
  *     security:
  *       - BearerAuth: []
  *     requestBody:
@@ -278,7 +278,7 @@ routes.delete('/favorite/delete', authMiddleware, new FavoriteController().delet
  * /favorite/all:
  *   post:
  *     summary: Get all favorite products
- *     tags: [Favorite]
+ *     tags: [Favorite products]
  *     security:
  *       - BearerAuth: []
  *     requestBody:
@@ -307,7 +307,7 @@ routes.post('/favorite/all', authMiddleware, new FavoriteController().get);
  * /sale/all:
  *   post:
  *     summary: Get all sales
- *     tags: [Sale]
+ *     tags: [Products on offers]
  *     responses:
  *       200:
  *         description: List of sales
