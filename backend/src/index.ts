@@ -4,10 +4,12 @@ import { AppDataSource } from "./data-source";
 import routes from "./routes/routes";
 import { errorMiddleware } from './middlewares/error'
 import cors from 'cors';
+import { setupSwagger } from '../swagger';
 
 AppDataSource.initialize().then(() => {
     const app = express()
-
+    setupSwagger(app)
+    
     const corsOptions = {
         origin: true, 
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
@@ -16,7 +18,6 @@ AppDataSource.initialize().then(() => {
     };
 
     app.use(cors(corsOptions));
-
     app.use(express.json({ limit: '50mb' }));
     app.use(express.urlencoded({ limit: '50mb', extended: true }));
     app.use(express.json())

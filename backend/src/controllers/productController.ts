@@ -2,9 +2,6 @@ import { Request, Response } from "express";
 import { productRepository } from "../repositories/productRepository";
 import { BadRequestError, UnauthorizedError } from "../helpers/api-erros";
 import { deleteImage, saveImageToFile } from "../utils/fileUtils";
-import { favoriteRepository } from "../repositories/favoriteRepository";
-import { JwtPayload } from "jsonwebtoken";
-import jwt from 'jsonwebtoken'
 import fs from 'fs';
 import { saleRepository } from "../repositories/saleRepository";
 import { returnFavorites } from "../utils/favoritesUtil";
@@ -43,6 +40,7 @@ export class ProductController {
     }
 
     async getAll(req: Request, res: Response) {
+
         const page = parseInt(req.query.page as string) || 1;
         const limit = parseInt(req.query.limit as string) || 10;
         const { authorization } = req.headers;
@@ -55,10 +53,14 @@ export class ProductController {
 
             if (!products.length) throw new Error("No products found.");
 
+
+
             const allProducts = await Promise.all(products.map(async product => {
                 const data = await fs.promises.readFile(product.image, 'base64');
                 return { ...product, image: data };
             }));
+
+
             return { allProducts, total };
         };
 
@@ -198,16 +200,16 @@ export class ProductController {
 
     async delete(req: Request, res: Response) {
 
-        const { id } = req.body;
-        if (!id) { throw new BadRequestError('Product ID required') }
+        const { productId } = req.body;
+        if (!productId) { throw new BadRequestError('Product ID required') }
 
-        const productImage = await productRepository.findOneBy({ id: id });
+        const productImage = await productRepository.findOneBy({ id: productId });
         if (productImage?.name) { await deleteImage(productImage.name) }
         else {
             throw new BadRequestError('Fail to delete image.')
         }
 
-        const product = await productRepository.delete({ id: id });
+        const product = await productRepository.delete({ id: productId });
         if (!product) {
             throw new BadRequestError('Product not found.')
         }
