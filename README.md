@@ -8,7 +8,7 @@ Este é um projeto de uma ecommerce fullstack!
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
 - [Instalação](#instalação)
 - [Uso](#uso)
-- [Requisitos](#uso)
+- [Requisitos](#requisitos)
 
 ## Visão Geral
 
